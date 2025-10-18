@@ -355,5 +355,3 @@ MIT © [EnvGuard Contributors](https://github.com/envguard/envguard/graphs/contr
 ---
 
 **Made with ❤️ for developers who care about security**
-
-# Temporary change for testing
