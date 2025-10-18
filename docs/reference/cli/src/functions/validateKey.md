@@ -4,7 +4,7 @@
 
 > **validateKey**(`key`): `boolean`
 
-Defined in: [core/keychain.validator.ts:50](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/keychain.validator.ts#L50)
+Defined in: [core/keychain.validator.ts:50](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/keychain.validator.ts#L50)
 
 Validates a key using a Zod schema.
 

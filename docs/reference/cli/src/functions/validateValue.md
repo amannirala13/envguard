@@ -4,7 +4,7 @@
 
 > **validateValue**(`schma`, `value`): `boolean`
 
-Defined in: [core/keychain.validator.ts:79](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/keychain.validator.ts#L79)
+Defined in: [core/keychain.validator.ts:79](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/keychain.validator.ts#L79)
 
 Validates a value using a Zod schema.
 

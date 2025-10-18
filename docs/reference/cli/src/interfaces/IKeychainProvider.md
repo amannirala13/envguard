@@ -2,7 +2,7 @@
 
 # Interface: IKeychainProvider
 
-Defined in: [core/system-keychain.ts:63](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L63)
+Defined in: [core/system-keychain.ts:63](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L63)
 
 IKeychainProvider defines the interface for a keychain provider.
 It includes methods for getting, listing, setting, deleting, and clearing keychain entries.
@@ -45,7 +45,7 @@ amannirala13
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:68](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L68)
+Defined in: [core/system-keychain.ts:68](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L68)
 
 #### Returns
 
@@ -57,7 +57,7 @@ Defined in: [core/system-keychain.ts:68](https://github.com/amannirala13/envguar
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L67)
+Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L67)
 
 #### Parameters
 
@@ -75,7 +75,7 @@ Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguar
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [core/system-keychain.ts:64](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L64)
+Defined in: [core/system-keychain.ts:64](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L64)
 
 #### Parameters
 
@@ -93,7 +93,7 @@ Defined in: [core/system-keychain.ts:64](https://github.com/amannirala13/envguar
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [core/system-keychain.ts:65](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L65)
+Defined in: [core/system-keychain.ts:65](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L65)
 
 #### Returns
 
@@ -105,7 +105,7 @@ Defined in: [core/system-keychain.ts:65](https://github.com/amannirala13/envguar
 
 > **set**(`key`, `value`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:66](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L66)
+Defined in: [core/system-keychain.ts:66](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L66)
 
 #### Parameters
 

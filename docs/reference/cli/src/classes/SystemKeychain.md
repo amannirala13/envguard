@@ -2,7 +2,7 @@
 
 # Class: SystemKeychain
 
-Defined in: [core/system-keychain.ts:114](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L114)
+Defined in: [core/system-keychain.ts:114](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L114)
 
 SystemKeychain provides a secure way to store and retrieve sensitive information
 such as tokens and passwords using the system's native keychain services.
@@ -69,7 +69,7 @@ amannirala13
 
 > **new SystemKeychain**(`packageName`): `SystemKeychain`
 
-Defined in: [core/system-keychain.ts:134](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L134)
+Defined in: [core/system-keychain.ts:134](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L134)
 
 Creates an instance of SystemKeychain.
 
@@ -110,7 +110,7 @@ may be using the same keychain on the system.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:208](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L208)
+Defined in: [core/system-keychain.ts:208](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L208)
 
 Clears all entries from the keychain.
 
@@ -156,7 +156,7 @@ functionality due to limitations in the underlying library.
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:236](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L236)
+Defined in: [core/system-keychain.ts:236](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L236)
 
 Deletes a value from the keychain.
 
@@ -208,7 +208,7 @@ Use this method to remove sensitive information such as tokens or passwords.
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [core/system-keychain.ts:168](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L168)
+Defined in: [core/system-keychain.ts:168](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L168)
 
 Gets a value from the keychain.
 
@@ -261,7 +261,7 @@ Use this method to retrieve sensitive information such as tokens or passwords.
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [core/system-keychain.ts:325](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L325)
+Defined in: [core/system-keychain.ts:325](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L325)
 
 Lists all keys stored in the keychain.
 
@@ -308,7 +308,7 @@ functionality due to limitations in the underlying library.
 
 > **set**(`key`, `value`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:280](https://github.com/amannirala13/envguard/blob/27fa3a91e5b82415a24e2e2859621b8033ae7435/packages/cli/src/core/system-keychain.ts#L280)
+Defined in: [core/system-keychain.ts:280](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L280)
 
 Sets a value in the keychain.
 
