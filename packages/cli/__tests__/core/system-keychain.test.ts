@@ -18,9 +18,9 @@ describe('SystemKeychain', () => {
     { key: 'username', value: 'testuser', result: true },
     { key: 'password', value: 'testpass', result: true },
     { key: 'token', value: 'abcd1234', result: true },
-    { key: 'empty', value: '', result: true },
 
     // -------------------- Failing cases --------------------
+    { key: '', value: '', result: false }, // Empty key should be invalid
     { key: 'nullbyte', value: '\u0000', result: false },
     { key: '', value: 'novalue', result: false },
     { key: 'verylongkey'.repeat(50), value: 'longvalue', result: false },

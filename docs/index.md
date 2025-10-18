@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "EnvGuard"
-  text: "Secure and easy env secret management tool for developers"
+  name: 'EnvGuard'
+  text: 'Secure and easy env secret management tool for developers'
   tagline: My great project tagline
   actions:
     - theme: brand
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

@@ -2,9 +2,9 @@
 
 # Type Alias: TKeyChainKey
 
-> **TKeyChainKey** = `z.infer`\<_typeof_ `KeyChainKeySchema`\>
+> **TKeyChainKey** = `z.infer`\<*typeof* `KeyChainKeySchema`\>
 
-Defined in: [types/index.ts:35](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/types/index.ts#L35)
+Defined in: [types/index.ts:39](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/types/index.ts#L39)
 
 Type representing a valid key for the system keychain.
 Derived from the KeyChainKeySchema.

@@ -4,7 +4,7 @@
 
 > **validateKey**(`key`): `boolean`
 
-Defined in: [core/keychain.validator.ts:50](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/keychain.validator.ts#L50)
+Defined in: [core/keychain.validator.ts:54](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/keychain.validator.ts#L54)
 
 Validates a key using a Zod schema.
 
@@ -36,7 +36,7 @@ If the key is valid, it returns true; otherwise, it returns false.
 
 ## See
 
-- DefaultKeyChainValueSchema for the default schema.
-- KeyChainKeySchema for the key schema.
-- z.ZodType for more details on the underlying implementation.
-- [validateValue](validateValue.md) for more details on the value validation.
+ - DefaultKeyChainValueSchema for the default schema.
+ - KeyChainKeySchema for the key schema.
+ - z.ZodType for more details on the underlying implementation.
+ - [validateValue](validateValue.md) for more details on the value validation.

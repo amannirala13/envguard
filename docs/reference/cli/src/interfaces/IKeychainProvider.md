@@ -2,12 +2,12 @@
 
 # Interface: IKeychainProvider
 
-Defined in: [core/system-keychain.ts:63](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L63)
+Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L67)
 
 IKeychainProvider defines the interface for a keychain provider.
 It includes methods for getting, listing, setting, deleting, and clearing keychain entries.
 
-IKeychainProvider
+ IKeychainProvider
 
 ## Example
 
@@ -27,13 +27,13 @@ keychain details and providing a consistent API for secure storage of sensitive 
 
 ## See
 
-- [SystemKeychain](../classes/SystemKeychain.md) for a concrete implementation of this interface.
-- Entry from NAPI-RS Keyring for more details on the underlying implementation.
-- [set](#set) to store values in the keychain.
-- [get](#get) to retrieve values from the keychain.
-- [list](#list) to list all keys in the keychain.
-- [delete](#delete) to remove values from the keychain.
-- [clear](#clear) to clear all entries in the keychain.
+ - [SystemKeychain](../classes/SystemKeychain.md) for a concrete implementation of this interface.
+ - Entry from NAPI-RS Keyring for more details on the underlying implementation.
+ - [set](#set) to store values in the keychain.
+ - [get](#get) to retrieve values from the keychain.
+ - [list](#list) to list all keys in the keychain.
+ - [delete](#delete) to remove values from the keychain.
+ - [clear](#clear) to clear all entries in the keychain.
 
 ## Author
 
@@ -45,19 +45,19 @@ amannirala13
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:68](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L68)
+Defined in: [core/system-keychain.ts:72](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L72)
 
 #### Returns
 
 `Promise`\<`void`\>
 
----
+***
 
 ### delete()
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L67)
+Defined in: [core/system-keychain.ts:71](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L71)
 
 #### Parameters
 
@@ -69,13 +69,13 @@ Defined in: [core/system-keychain.ts:67](https://github.com/amannirala13/envguar
 
 `Promise`\<`void`\>
 
----
+***
 
 ### get()
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [core/system-keychain.ts:64](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L64)
+Defined in: [core/system-keychain.ts:68](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L68)
 
 #### Parameters
 
@@ -87,25 +87,25 @@ Defined in: [core/system-keychain.ts:64](https://github.com/amannirala13/envguar
 
 `Promise`\<`string` \| `null`\>
 
----
+***
 
 ### list()
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [core/system-keychain.ts:65](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L65)
+Defined in: [core/system-keychain.ts:69](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L69)
 
 #### Returns
 
 `Promise`\<`string`[]\>
 
----
+***
 
 ### set()
 
 > **set**(`key`, `value`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:66](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L66)
+Defined in: [core/system-keychain.ts:70](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L70)
 
 #### Parameters
 

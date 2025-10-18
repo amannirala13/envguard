@@ -2,7 +2,7 @@
 
 # Class: SystemKeychain
 
-Defined in: [core/system-keychain.ts:114](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L114)
+Defined in: [core/system-keychain.ts:118](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L118)
 
 SystemKeychain provides a secure way to store and retrieve sensitive information
 such as tokens and passwords using the system's native keychain services.
@@ -47,13 +47,13 @@ by the underlying NAPI-RS Keyring library and are implemented as no-ops or retur
 
 ## See
 
-- [IKeychainProvider](../interfaces/IKeychainProvider.md) for the interface definition.
-- Entry from NAPI-RS Keyring for more details on the underlying implementation.
-- [set](#set) to store values in the keychain.
-- [get](#get) to retrieve values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [delete](#delete) to remove values from the keychain.
-- [clear](#clear) to clear all entries in the keychain (not supported).
+ - [IKeychainProvider](../interfaces/IKeychainProvider.md) for the interface definition.
+ - Entry from NAPI-RS Keyring for more details on the underlying implementation.
+ - [set](#set) to store values in the keychain.
+ - [get](#get) to retrieve values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [delete](#delete) to remove values from the keychain.
+ - [clear](#clear) to clear all entries in the keychain (not supported).
 
 ## Author
 
@@ -69,7 +69,7 @@ amannirala13
 
 > **new SystemKeychain**(`packageName`): `SystemKeychain`
 
-Defined in: [core/system-keychain.ts:134](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L134)
+Defined in: [core/system-keychain.ts:138](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L138)
 
 Creates an instance of SystemKeychain.
 
@@ -99,10 +99,10 @@ may be using the same keychain on the system.
 
 #### See
 
-- [set](#set) to store values in the keychain.
-- [get](#get) to retrieve values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [delete](#delete) to remove values from the keychain.
+ - [set](#set) to store values in the keychain.
+ - [get](#get) to retrieve values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [delete](#delete) to remove values from the keychain.
 
 ## Methods
 
@@ -110,7 +110,7 @@ may be using the same keychain on the system.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:208](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L208)
+Defined in: [core/system-keychain.ts:212](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L212)
 
 Clears all entries from the keychain.
 
@@ -141,22 +141,22 @@ functionality due to limitations in the underlying library.
 
 #### See
 
-- [set](#set) to store values in the keychain.
-- [get](#get) to retrieve values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [delete](#delete) to remove values from the keychain.
+ - [set](#set) to store values in the keychain.
+ - [get](#get) to retrieve values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [delete](#delete) to remove values from the keychain.
 
 #### Implementation of
 
 [`IKeychainProvider`](../interfaces/IKeychainProvider.md).[`clear`](../interfaces/IKeychainProvider.md#clear)
 
----
+***
 
 ### delete()
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:236](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L236)
+Defined in: [core/system-keychain.ts:240](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L240)
 
 Deletes a value from the keychain.
 
@@ -193,22 +193,22 @@ Use this method to remove sensitive information such as tokens or passwords.
 
 #### See
 
-- [set](#set) to store values in the keychain.
-- [get](#get) to retrieve values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [clear](#clear) to clear all entries in the keychain (not supported).
+ - [set](#set) to store values in the keychain.
+ - [get](#get) to retrieve values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [clear](#clear) to clear all entries in the keychain (not supported).
 
 #### Implementation of
 
 [`IKeychainProvider`](../interfaces/IKeychainProvider.md).[`delete`](../interfaces/IKeychainProvider.md#delete)
 
----
+***
 
 ### get()
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [core/system-keychain.ts:168](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L168)
+Defined in: [core/system-keychain.ts:172](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L172)
 
 Gets a value from the keychain.
 
@@ -246,22 +246,22 @@ Use this method to retrieve sensitive information such as tokens or passwords.
 
 #### See
 
-- [set](#set) to store values in the keychain.
-- [delete](#delete) to remove values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [clear](#clear) to clear all entries in the keychain (not supported).
+ - [set](#set) to store values in the keychain.
+ - [delete](#delete) to remove values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [clear](#clear) to clear all entries in the keychain (not supported).
 
 #### Implementation of
 
 [`IKeychainProvider`](../interfaces/IKeychainProvider.md).[`get`](../interfaces/IKeychainProvider.md#get)
 
----
+***
 
 ### list()
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [core/system-keychain.ts:325](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L325)
+Defined in: [core/system-keychain.ts:329](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L329)
 
 Lists all keys stored in the keychain.
 
@@ -293,22 +293,22 @@ functionality due to limitations in the underlying library.
 
 #### See
 
-- [get](#get) to retrieve values from the keychain.
-- [set](#set) to store values in the keychain.
-- [delete](#delete) to remove values from the keychain.
-- [clear](#clear) to clear all entries in the keychain (not supported).
+ - [get](#get) to retrieve values from the keychain.
+ - [set](#set) to store values in the keychain.
+ - [delete](#delete) to remove values from the keychain.
+ - [clear](#clear) to clear all entries in the keychain (not supported).
 
 #### Implementation of
 
 [`IKeychainProvider`](../interfaces/IKeychainProvider.md).[`list`](../interfaces/IKeychainProvider.md#list)
 
----
+***
 
 ### set()
 
 > **set**(`key`, `value`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:280](https://github.com/amannirala13/envguard/blob/4950c98cca85182ffffac01eaa251b63d00a5e89/packages/cli/src/core/system-keychain.ts#L280)
+Defined in: [core/system-keychain.ts:284](https://github.com/amannirala13/envguard/blob/91c6c6d5d9fbc580b45750233b2fb455656c9ae0/packages/cli/src/core/system-keychain.ts#L284)
 
 Sets a value in the keychain.
 
@@ -352,10 +352,10 @@ Use this method to store sensitive information such as tokens or passwords.
 
 #### See
 
-- [get](#get) to retrieve values from the keychain.
-- [delete](#delete) to remove values from the keychain.
-- [list](#list) to list all keys in the keychain (not supported).
-- [clear](#clear) to clear all entries in the keychain (not supported).
+ - [get](#get) to retrieve values from the keychain.
+ - [delete](#delete) to remove values from the keychain.
+ - [list](#list) to list all keys in the keychain (not supported).
+ - [clear](#clear) to clear all entries in the keychain (not supported).
 
 #### Implementation of
 
