@@ -2,6 +2,10 @@
 
 # cli/src
 
+## Namespaces
+
+- [Logger](namespaces/Logger/index.md)
+
 ## Classes
 
 - [SystemKeychain](classes/SystemKeychain.md)
