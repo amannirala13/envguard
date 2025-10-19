@@ -49,14 +49,14 @@ jobs:
       - name: Publish @envguard/cli to npm
         if: github.event.inputs.package == 'all' || github.event.inputs.package == 'cli' || github.event_name == 'release'
         working-directory: ./packages/cli
-        run: pnpm publish --no-git-checks --access public
+        run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @envguard/runner-node to npm
         if: github.event.inputs.package == 'all' || github.event.inputs.package == 'runner-node' || github.event_name == 'release'
         working-directory: ./packages/runner-node
-        run: pnpm publish --no-git-checks --access public
+        run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
