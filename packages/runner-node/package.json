@@ -2,13 +2,37 @@
   "name": "@envguard/runner-node",
   "version": "0.1.0",
   "description": "EnvGuard Node.js runner for injecting secrets",
+  "keywords": [
+    "envguard",
+    "secrets",
+    "environment-variables",
+    "runtime",
+    "node-runner"
+  ],
+  "homepage": "https://github.com/amannirala13/envguard#readme",
+  "bugs": {
+    "url": "https://github.com/amannirala13/envguard/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amannirala13/envguard.git",
+    "directory": "packages/runner-node"
+  },
   "license": "MIT",
+  "author": {
+    "name": "Aman Nirala",
+    "url": "https://github.com/amannirala13"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",
