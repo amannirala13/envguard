@@ -2,9 +2,12 @@
 
 # cli/src
 
+## Namespaces
+
+- [Logger](namespaces/Logger/index.md)
+
 ## Classes
 
-- [Logger](classes/Logger.md)
 - [SystemKeychain](classes/SystemKeychain.md)
 
 ## Interfaces
@@ -19,14 +22,9 @@
 
 ## Variables
 
-- [LogTag](variables/LogTag.md)
 - [version](variables/version.md)
 
 ## Functions
 
-- [error](functions/error.md)
-- [info](functions/info.md)
 - [validateKey](functions/validateKey.md)
 - [validateValue](functions/validateValue.md)
-- [verbose](functions/verbose.md)
-- [warn](functions/warn.md)

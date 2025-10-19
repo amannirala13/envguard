@@ -11,6 +11,7 @@ export interface IEnvGuardConfig {
   package: string;
   templateFile: string;
   manifestVersion: string;
+  defaultEnvironment: string;
 }
 
 /**
@@ -33,11 +34,13 @@ export class EnvGuardConfig implements IEnvGuardConfig {
   package: string;
   templateFile: string;
   manifestVersion: string;
+  defaultEnvironment: string;
 
   constructor(data: IEnvGuardConfig) {
     this.package = data.package;
     this.templateFile = data.templateFile;
     this.manifestVersion = data.manifestVersion;
+    this.defaultEnvironment = data.defaultEnvironment;
   }
 
   /**
@@ -68,6 +71,15 @@ export class EnvGuardConfig implements IEnvGuardConfig {
   }
 
   /**
+   * Get default environment
+   *
+   * @returns Default environment name
+   */
+  getDefaultEnvironment(): string {
+    return this.defaultEnvironment;
+  }
+
+  /**
    * Convert config to plain object
    *
    * @returns Plain object representation
@@ -77,6 +89,7 @@ export class EnvGuardConfig implements IEnvGuardConfig {
       package: this.package,
       templateFile: this.templateFile,
       manifestVersion: this.manifestVersion,
+      defaultEnvironment: this.defaultEnvironment,
     };
   }
 
@@ -92,7 +105,9 @@ export class EnvGuardConfig implements IEnvGuardConfig {
       !!this.templateFile &&
       this.templateFile.trim().length > 0 &&
       !!this.manifestVersion &&
-      this.manifestVersion.trim().length > 0
+      this.manifestVersion.trim().length > 0 &&
+      !!this.defaultEnvironment &&
+      this.defaultEnvironment.trim().length > 0
     );
   }
 }

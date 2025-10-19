@@ -1,10 +1,10 @@
-[envguard-monorepo](../../../index.md) / [cli/src](../index.md) / verbose
+[envguard-monorepo](../../../../../index.md) / [cli/src](../../../index.md) / [Logger](../index.md) / verbose
 
 # Function: verbose()
 
 > **verbose**(`v`, `tag`, ...`args`): `void`
 
-Defined in: [utils/logger/logger.utils.ts:15](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.utils.ts#L15)
+Defined in: [utils/logger/logger.utils.ts:15](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.utils.ts#L15)
 
 Logs a verbose message if verbose mode is enabled.
 Accepts multiple arguments like console.log

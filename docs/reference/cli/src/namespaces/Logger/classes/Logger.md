@@ -1,8 +1,8 @@
-[envguard-monorepo](../../../index.md) / [cli/src](../index.md) / Logger
+[envguard-monorepo](../../../../../index.md) / [cli/src](../../../index.md) / [Logger](../index.md) / Logger
 
 # Class: Logger
 
-Defined in: [utils/logger/logger.ts:12](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L12)
+Defined in: [utils/logger/logger.ts:12](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L12)
 
 ## Constructors
 
@@ -10,7 +10,7 @@ Defined in: [utils/logger/logger.ts:12](https://github.com/amannirala13/envguard
 
 > **new Logger**(`verbose`): `Logger`
 
-Defined in: [utils/logger/logger.ts:14](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L14)
+Defined in: [utils/logger/logger.ts:14](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L14)
 
 #### Parameters
 
@@ -28,7 +28,7 @@ Defined in: [utils/logger/logger.ts:14](https://github.com/amannirala13/envguard
 
 > **debug**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:94](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L94)
+Defined in: [utils/logger/logger.ts:94](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L94)
 
 Logs a debug message if verbose mode is enabled.
 Accepts multiple arguments like console.log
@@ -51,7 +51,7 @@ Any number of values to log
 
 > **error**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:76](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L76)
+Defined in: [utils/logger/logger.ts:76](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L76)
 
 Logs an error message.
 Accepts multiple arguments like console.log
@@ -74,7 +74,7 @@ Any number of values to log
 
 > **info**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:58](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L58)
+Defined in: [utils/logger/logger.ts:58](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L58)
 
 Logs an informational message.
 Accepts multiple arguments like console.log
@@ -104,7 +104,7 @@ logger.info('Count:', 42, 'Status:', 'active');
 
 > **log**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:111](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L111)
+Defined in: [utils/logger/logger.ts:111](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L111)
 
 Logs a simple message with the LOG tag.
 Accepts multiple arguments like console.log
@@ -127,7 +127,7 @@ Any number of values to log
 
 > **success**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:85](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L85)
+Defined in: [utils/logger/logger.ts:85](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L85)
 
 Logs a success message.
 Accepts multiple arguments like console.log
@@ -150,7 +150,7 @@ Any number of values to log
 
 > **verbose**(`tag`, ...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:36](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L36)
+Defined in: [utils/logger/logger.ts:36](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L36)
 
 Logs a verbose message if verbose mode is enabled.
 Accepts multiple arguments like console.log
@@ -197,7 +197,7 @@ It displays the tag followed by the arguments in dim text.
 
 > **warn**(...`args`): `void`
 
-Defined in: [utils/logger/logger.ts:67](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/utils/logger/logger.ts#L67)
+Defined in: [utils/logger/logger.ts:67](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/utils/logger/logger.ts#L67)
 
 Logs a warning message.
 Accepts multiple arguments like console.log

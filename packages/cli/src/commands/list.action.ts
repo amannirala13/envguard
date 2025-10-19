@@ -27,7 +27,7 @@ export async function listAction(options: ListOptions): Promise<void> {
   // 1. Check if EnvGuard is initialized
   const config = await configManager.load();
   if (!config) {
-    error('EnvGuard not initialized. Run "envguard init" first.');
+    error('EnvGuard not initialized. Run "envg init" first.');
     process.exit(1);
   }
 
@@ -46,7 +46,7 @@ export async function listAction(options: ListOptions): Promise<void> {
 
     if (keys.length === 0) {
       warn(`No secrets found for package "${packageName}"`);
-      info('\nRun "envguard set <KEY> <value>" to store a secret.');
+      info('\nRun "envg set <KEY> <value>" to store a secret.');
     } else {
       info(`\nSecrets for "${packageName}":`);
 

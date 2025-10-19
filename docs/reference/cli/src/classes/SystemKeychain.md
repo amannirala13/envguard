@@ -2,7 +2,7 @@
 
 # Class: SystemKeychain
 
-Defined in: [core/system-keychain.ts:118](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L118)
+Defined in: [core/system-keychain.ts:119](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L119)
 
 SystemKeychain provides a secure way to store and retrieve sensitive information
 such as tokens and passwords using the system's native keychain services.
@@ -67,9 +67,9 @@ amannirala13
 
 ### Constructor
 
-> **new SystemKeychain**(`packageName`): `SystemKeychain`
+> **new SystemKeychain**(`packageName`, `projectRoot`): `SystemKeychain`
 
-Defined in: [core/system-keychain.ts:138](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L138)
+Defined in: [core/system-keychain.ts:143](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L143)
 
 Creates an instance of SystemKeychain.
 
@@ -81,6 +81,12 @@ Creates an instance of SystemKeychain.
 
 The package name used as the service identifier in the keychain.
 
+##### projectRoot
+
+`string` = `...`
+
+Project root directory (defaults to process.cwd())
+
 #### Returns
 
 `SystemKeychain`
@@ -88,20 +94,20 @@ The package name used as the service identifier in the keychain.
 #### Example
 
 ```ts
-const keychain = new SystemKeychain('my-package-name');
+const keychain = new SystemKeychain('my-package-name', '/path/to/project');
 ```
 
 #### Remarks
 
 The package name is used to namespace the keychain entries, ensuring that they do not conflict
-with entries from other applications. This is particularly important when multiple applications
-may be using the same keychain on the system.
+with entries from other applications. The project root is used to locate the project-local
+manifest file at .envguard/manifest.json.
 
 #### See
 
  - [set](#set) to store values in the keychain.
  - [get](#get) to retrieve values from the keychain.
- - [list](#list) to list all keys in the keychain (not supported).
+ - [list](#list) to list all keys in the keychain (now supported via manifest).
  - [delete](#delete) to remove values from the keychain.
 
 ## Methods
@@ -110,7 +116,7 @@ may be using the same keychain on the system.
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:212](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L212)
+Defined in: [core/system-keychain.ts:221](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L221)
 
 Clears all entries from the keychain.
 
@@ -156,7 +162,7 @@ functionality due to limitations in the underlying library.
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:240](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L240)
+Defined in: [core/system-keychain.ts:249](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L249)
 
 Deletes a value from the keychain.
 
@@ -208,7 +214,7 @@ Use this method to remove sensitive information such as tokens or passwords.
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [core/system-keychain.ts:172](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L172)
+Defined in: [core/system-keychain.ts:181](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L181)
 
 Gets a value from the keychain.
 
@@ -257,39 +263,51 @@ Use this method to retrieve sensitive information such as tokens or passwords.
 
 ***
 
+### getProjectRoot()
+
+> **getProjectRoot**(): `string`
+
+Defined in: [core/system-keychain.ts:356](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L356)
+
+Get project root directory
+
+#### Returns
+
+`string`
+
+Project root path
+
+***
+
 ### list()
 
 > **list**(): `Promise`\<`string`[]\>
 
-Defined in: [core/system-keychain.ts:329](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L329)
+Defined in: [core/system-keychain.ts:347](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L347)
 
-Lists all keys stored in the keychain.
+Lists all keys stored in the keychain for this package.
 
 #### Returns
 
 `Promise`\<`string`[]\>
 
-An empty array.
-
-#### Warning
-
-NAPI-RS Keyring does not support listing entries. This method returns an empty array.
+Array of key names stored for this package.
 
 #### Throws
 
-Will not throw; this is a noop.
+Will not throw under normal circumstances.
 
 #### Example
 
 ```ts
 const keys = await keychain.list();
-console.log(keys);
+console.log(keys); // ['API_KEY', 'DATABASE_URL']
 ```
 
 #### Remarks
 
-This method is included to fulfill the IKeychainProvider interface but does not provide actual
-functionality due to limitations in the underlying library.
+This method reads from the manifest file since NAPI-RS Keyring does not support listing entries directly.
+The manifest tracks which keys have been set for each package.
 
 #### See
 
@@ -306,9 +324,9 @@ functionality due to limitations in the underlying library.
 
 ### set()
 
-> **set**(`key`, `value`): `Promise`\<`void`\>
+> **set**(`key`, `value`, `required`): `Promise`\<`void`\>
 
-Defined in: [core/system-keychain.ts:284](https://github.com/amannirala13/envguard/blob/87b168e9d43b40a7a2649202a947bdb992c12274/packages/cli/src/core/system-keychain.ts#L284)
+Defined in: [core/system-keychain.ts:297](https://github.com/amannirala13/envguard/blob/3109fc1a57b52249408b958acacfd83ef088e5f3/packages/cli/src/core/system-keychain.ts#L297)
 
 Sets a value in the keychain.
 
@@ -326,6 +344,12 @@ The key to set.
 
 The value to set.
 
+##### required
+
+`boolean` = `true`
+
+Whether the key is required (default: true)
+
 #### Returns
 
 `Promise`\<`void`\>
@@ -342,6 +366,7 @@ A promise that resolves when the value is set.
 
 ```ts
 await keychain.set('myKey', 'myValue');
+await keychain.set('optionalKey', 'value', false); // Mark as optional
 ```
 
 #### Remarks

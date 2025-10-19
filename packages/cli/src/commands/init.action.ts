@@ -142,7 +142,7 @@ export async function initAction(options: InitOptions): Promise<void> {
   // 6. Show next steps
   info('\nNext steps:');
   info(`  1. Edit ${templateFile} to define your secrets`);
-  info('  2. Run: envguard set <KEY> <value>');
-  info('  3. Run: envguard list');
+  info('  2. Run: envg set <KEY> <value>');
+  info('  3. Run: envg list');
   info(`  4. Commit .envguard/ and ${templateFile} to git`);
 }
