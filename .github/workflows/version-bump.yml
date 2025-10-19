@@ -1,0 +1,84 @@
+name: Version Bump
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to bump (cli, runner-node, or both)'
+        required: true
+        type: choice
+        options:
+          - both
+          - cli
+          - runner-node
+      version:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump CLI version
+        if: github.event.inputs.package == 'cli' || github.event.inputs.package == 'both'
+        working-directory: ./packages/cli
+        run: |
+          pnpm version ${{ github.event.inputs.version }} --no-git-tag-version
+          echo "CLI_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+
+      - name: Bump Runner-Node version
+        if: github.event.inputs.package == 'runner-node' || github.event.inputs.package == 'both'
+        working-directory: ./packages/runner-node
+        run: |
+          pnpm version ${{ github.event.inputs.version }} --no-git-tag-version
+          echo "RUNNER_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+
+      - name: Commit version bump
+        run: |
+          git add packages/*/package.json
+          git commit -m "chore: bump version to ${{ env.CLI_VERSION || env.RUNNER_VERSION }}"
+          git push
+
+      - name: Create tag
+        run: |
+          if [ "${{ github.event.inputs.package }}" = "cli" ]; then
+            git tag "cli-v${{ env.CLI_VERSION }}"
+            git push origin "cli-v${{ env.CLI_VERSION }}"
+          elif [ "${{ github.event.inputs.package }}" = "runner-node" ]; then
+            git tag "runner-node-v${{ env.RUNNER_VERSION }}"
+            git push origin "runner-node-v${{ env.RUNNER_VERSION }}"
+          else
+            git tag "v${{ env.CLI_VERSION }}"
+            git push origin "v${{ env.CLI_VERSION }}"
+          fi
