@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
 import { program } from 'commander';
 import { SystemKeychain } from './core';
 import { error, info, LogTag, verbose, warn } from './utils';
+import { log } from './utils/logger/logger.utils';
 
 const version = '0.1.0';
 
@@ -27,9 +27,9 @@ program
   .command('init')
   .description('Initialize EnvGuard in the current directory')
   .action(() => {
-    info(chalk.blue('Initializing EnvGuard...'));
-    warn(chalk.yellow('This command is not yet implemented'));
-    info(chalk.dim('See the implementation guide for development progress'));
+    info('Initializing EnvGuard...');
+    warn('This command is not yet implemented.');
+    info('See the implementation guide for development progress.');
   });
 
 /**
@@ -59,7 +59,10 @@ program
       value: string,
       options: { verbose: boolean }
     ) => {
-      verbose(options.verbose, LogTag.LOG, chalk.dim('Options: '), options);
+      verbose(options.verbose, LogTag.LOG, 'options:', options);
+      verbose(options.verbose, LogTag.LOG, 'pkg:', pkg);
+      verbose(options.verbose, LogTag.LOG, 'key:', key);
+      verbose(options.verbose, LogTag.LOG, 'value:', value);
 
       if (pkg == undefined) {
         error('Package name is required to set a secret.');
@@ -124,15 +127,15 @@ program
       // Retrieve the secret
       keyChain
         .get(key)
-        .then((key) => {
+        .then((value) => {
           // Log the retrieved secret or fallback
-          if (key !== null) {
+          if (value !== null) {
             verbose(
               options.verbose,
               LogTag.SUCCESS,
-              `Retrieved secret for key: ${key}`
+              `Retrieved secret for key: ${value}`
             );
-            info(chalk.dim(`${key}`));
+            log(`${value}`);
           }
           // Handle missing secret with default fallback
           else if (options.defaultFallback !== undefined) {
@@ -141,7 +144,7 @@ program
               LogTag.WARN,
               `Secret for key "${key}" not found. Using default fallback value.`
             );
-            info(chalk.dim(`${options.defaultFallback}`));
+            log(`${options.defaultFallback}`);
           }
           // No secret and no fallback
           else {
@@ -162,26 +165,26 @@ program
   .command('list')
   .description('List all stored secrets (keys only)')
   .action(() => {
-    info(chalk.blue('📋 Listing stored secrets...'));
-    warn(chalk.yellow('⚠️  This command is not yet implemented'));
+    info('Listing stored secrets...');
+    warn('This command is not yet implemented.');
   });
 
 program
   .command('status')
   .description('Show current EnvGuard status and configuration')
   .action(() => {
-    info(chalk.blue('📊 EnvGuard Status'));
-    info(chalk.green(`✅ Version: ${version}`));
-    info(chalk.green(`✅ Node.js: ${process.version}`));
-    info(chalk.green(`✅ Platform: ${process.platform} ${process.arch}`));
-    warn(chalk.yellow('⚠️  Full functionality coming soon'));
+    info('EnvGuard Status');
+    info(`Version: ${version}`);
+    info(`Node.js: ${process.version}`);
+    info(`Platform: ${process.platform} ${process.arch}`);
+    warn('Full functionality coming soon.');
 
-    // Show development status
-    info(chalk.dim('\n📋 Implementation Progress:'));
-    info(chalk.dim('  🚧 Keychain integration (in progress)'));
-    info(chalk.dim('  ⏳ CLI commands'));
-    info(chalk.dim('  ⏳ Config validation'));
-    info(chalk.dim('  ⏳ Runtime runners'));
+    info('');
+    info('Implementation Progress:');
+    info('  • Keychain integration (in progress)');
+    info('  • CLI commands');
+    info('  • Config validation');
+    info('  • Runtime runners');
   });
 
 // Add help examples
