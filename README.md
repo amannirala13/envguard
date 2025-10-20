@@ -436,7 +436,7 @@ pnpm dev
 
 ## 📄 License
 
-MIT © [EnvGuard Contributors](https://github.com/envguard/envguard/graphs/contributors)
+MIT © [EnvGuard Contributors](https://github.com/amannirala13/envguard/graphs/contributors)
 
 ---
 
