@@ -53,6 +53,7 @@ jobs:
         run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
 
       - name: Publish @envguard/runner-node to npm
         if: github.event.inputs.package == 'all' || github.event.inputs.package == 'runner-node' || github.event_name == 'release'
@@ -60,6 +61,7 @@ jobs:
         run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
 
       # Optional: Also publish to GitHub Packages
       - name: Setup Node.js for GitHub Packages
