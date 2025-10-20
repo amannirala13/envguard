@@ -6,4 +6,4 @@
  */
 
 // Re-export all types from @envguard/core
-export * from '@envguard/core/types';
+export * from '@envguard/core';
