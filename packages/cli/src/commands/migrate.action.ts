@@ -7,8 +7,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import inquirer from 'inquirer';
-import { SystemKeychain } from '../core';
-import { ConfigManager } from '../core/config/config.manager';
+import { SystemKeychain } from '@envguard/core';
+import { ConfigManager } from '@envguard/core';
 import { error, success, verbose, warn, info, LogTag } from '../utils/logger';
 
 export interface MigrateOptions {

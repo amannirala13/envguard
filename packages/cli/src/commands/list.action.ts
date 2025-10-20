@@ -4,8 +4,8 @@
  * @description Implementation of the list command
  */
 
-import { ConfigManager } from '../core/config/config.manager';
-import { ManifestManager } from '../core/manifest/manifest.manager';
+import { ConfigManager } from '@envguard/core';
+import { ManifestManager } from '@envguard/core';
 import { error, info, log, verbose, warn, LogTag } from '../utils/logger';
 
 /**

@@ -40,6 +40,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Build all packages (core + cli + node)
+      # Note: @envguard/core is bundled into cli and node, not published separately
       - name: Build packages
         run: pnpm build
 

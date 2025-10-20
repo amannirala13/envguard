@@ -1,4 +1,4 @@
-import { SystemKeychain } from '../core';
+import { SystemKeychain } from '@envguard/core';
 
 const keychain = new SystemKeychain('com.amannirala.example.keychain');
 

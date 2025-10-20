@@ -9,7 +9,7 @@ import path from 'path';
 import { z } from 'zod';
 import { EnvGuardConfig, IEnvGuardConfig } from './config';
 import { ConfigFactory } from './config.factory';
-import { EnvGuardConfigSchema } from '../../types/types.schema';
+import { EnvGuardConfigSchema } from '../types/types.schema';
 
 /**
  * Handles file I/O and validation for EnvGuardConfig

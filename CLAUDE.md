@@ -10,19 +10,24 @@ EnvGuard is a **local-first secret management tool for developers** that stores 
 
 ### Monorepo Structure
 
-This is a **pnpm workspace monorepo** with three main packages:
+This is a **pnpm workspace monorepo** with four main packages:
+
+- **`packages/core/`** - Core business logic (`@envguard/core`) **[INTERNAL - NOT PUBLISHED]**
+  - Shared keychain integration, secret storage, validation logic
+  - Bundled into CLI and Node runtime packages
+  - Not published to npm (private package)
 
 - **`packages/cli/`** - Main EnvGuard CLI application (`@envguard/cli`)
-  - Contains the command-line interface and core logic
-  - Binary entry point: `envguard` command
-  - Core modules for keychain integration, secret storage, validation, and Git integration
+  - Command-line interface for managing secrets
+  - Binary entry point: `envg` command
+  - Bundles `@envguard/core` for standalone use
 
 - **`packages/node/`** - Node.js runtime integration (`@envguard/node`)
   - Provides runtime secret injection for Node.js applications
-  - Used as `envguard-node app.js` or via Node.js preload module
+  - Bundles `@envguard/core` for standalone use
+  - Used via `import` or `--require` flag
 
-- **`packages/runner-python/`** - Python runtime integration (planned)
-  - Python package for secret injection in Python applications
+- **Future:** Python/Go/Rust runtime integrations (separate repositories)
 
 ### Core Concepts
 

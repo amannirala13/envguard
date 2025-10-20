@@ -22,6 +22,7 @@ export default defineConfig({
     '@napi-rs/keyring',
   ],
   noExternal: [
-    // Bundle everything else
+    // Bundle @envguard/core into the CLI
+    '@envguard/core',
   ],
 });
