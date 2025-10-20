@@ -2,10 +2,12 @@
 
 ## ✅ What's Already Configured
 
-Both packages are ready to publish:
+Both packages are ready to publish to npm:
 
-- ✅ `@envguard/cli` - Version 0.1.3
+- ✅ `@envguard/cli` - Version 0.1.6
 - ✅ `@envguard/runner-node` - Version 0.1.0
+- ✅ npm provenance enabled for supply chain security
+- ✅ Automated GitHub Actions workflows
 
 ## 🚀 Publishing Both Packages Together
 
@@ -66,15 +68,15 @@ pnpm publish --access public
 
 ### @envguard/cli
 
-- **Current:** 0.1.3
-- **Published to:** npm registry
+- **Current:** 0.1.6
+- **Published to:** npm registry with provenance
 - **Install:** `npm install -g @envguard/cli`
 - **Link:** https://www.npmjs.com/package/@envguard/cli
 
 ### @envguard/runner-node
 
 - **Current:** 0.1.0
-- **Published to:** npm registry
+- **Published to:** npm registry with provenance
 - **Install:** `npm install @envguard/runner-node`
 - **Link:** https://www.npmjs.com/package/@envguard/runner-node
 
