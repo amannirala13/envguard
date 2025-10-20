@@ -7,7 +7,7 @@ This guide explains how to publish packages from this monorepo to npm and GitHub
 This monorepo contains two packages:
 
 - `@envguard/cli` - Main CLI tool
-- `@envguard/runner-node` - Node.js runtime library
+- `@envguard/node` - Node.js runtime library
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ This is the **recommended** approach as it links GitHub releases with npm packag
    **Option A: Using GitHub Actions (UI)**
    - Go to Actions → Version Bump
    - Click "Run workflow"
-   - Select package (`cli`, `runner-node`, or `both`)
+   - Select package (`cli`, `node`, or `both`)
    - Select version bump type (`patch`, `minor`, or `major`)
    - Click "Run workflow"
    - This will commit the version bump and create a git tag
@@ -56,8 +56,8 @@ This is the **recommended** approach as it links GitHub releases with npm packag
    cd packages/cli
    pnpm version patch  # or minor, or major
 
-   # Bump runner-node version
-   cd packages/runner-node
+   # Bump node version
+   cd packages/node
    pnpm version patch  # or minor, or major
 
    # Commit and tag
@@ -94,7 +94,7 @@ This is the **recommended** approach as it links GitHub releases with npm packag
 ## 📦 Packages
 
 - `@envguard/cli@0.1.4`
-- `@envguard/runner-node@0.1.0`
+- `@envguard/node@0.1.0`
 
 ## 📝 Full Changelog
 
@@ -103,7 +103,7 @@ This is the **recommended** approach as it links GitHub releases with npm packag
 ## 🔗 Links
 
 - [npm: @envguard/cli](https://www.npmjs.com/package/@envguard/cli)
-- [npm: @envguard/runner-node](https://www.npmjs.com/package/@envguard/runner-node)
+- [npm: @envguard/node](https://www.npmjs.com/package/@envguard/node)
 - [Documentation](https://github.com/amannirala13/envguard#readme)
 ```
 
@@ -113,7 +113,7 @@ If you want to publish without creating a release:
 
 1. Go to Actions → Publish Packages
 2. Click "Run workflow"
-3. Select package to publish (`all`, `cli`, or `runner-node`)
+3. Select package to publish (`all`, `cli`, or `node`)
 4. Click "Run workflow"
 
 ### Method 3: Local Manual Publishing
@@ -128,8 +128,8 @@ pnpm build
 cd packages/cli
 pnpm publish --access public
 
-# Publish runner-node
-cd packages/runner-node
+# Publish node
+cd packages/node
 pnpm publish --access public
 ```
 
@@ -148,7 +148,7 @@ We follow [Semantic Versioning](https://semver.org/):
 Each package has its own version:
 
 - `@envguard/cli` - Currently at `0.1.3`
-- `@envguard/runner-node` - Currently at `0.1.0`
+- `@envguard/node` - Currently at `0.1.0`
 
 They can be versioned independently based on changes.
 
@@ -173,13 +173,13 @@ They can be versioned independently based on changes.
 Packages are published to [npmjs.com](https://www.npmjs.com/):
 
 - [@envguard/cli](https://www.npmjs.com/package/@envguard/cli)
-- [@envguard/runner-node](https://www.npmjs.com/package/@envguard/runner-node)
+- [@envguard/node](https://www.npmjs.com/package/@envguard/node)
 
 **Installation:**
 
 ```bash
 npm install -g @envguard/cli
-npm install @envguard/runner-node
+npm install @envguard/node
 ```
 
 ### GitHub Packages (Optional Mirror)
@@ -187,7 +187,7 @@ npm install @envguard/runner-node
 Packages are also mirrored to GitHub Packages:
 
 - `https://npm.pkg.github.com/@envguard/cli`
-- `https://npm.pkg.github.com/@envguard/runner-node`
+- `https://npm.pkg.github.com/@envguard/node`
 
 **Installation from GitHub Packages:**
 
@@ -284,7 +284,7 @@ After publishing:
 ```bash
 # Check what will be published
 pnpm --filter @envguard/cli pack --dry-run
-pnpm --filter @envguard/runner-node pack --dry-run
+pnpm --filter @envguard/node pack --dry-run
 
 # View package contents
 npm pack
@@ -293,11 +293,11 @@ rm -rf package *.tgz
 
 # Check package info
 npm view @envguard/cli
-npm view @envguard/runner-node
+npm view @envguard/node
 
 # List all versions
 npm view @envguard/cli versions
-npm view @envguard/runner-node versions
+npm view @envguard/node versions
 ```
 
 ## Resources

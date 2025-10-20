@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        description: 'Package to bump (cli, runner-node, or both)'
+        description: 'Package to bump (cli, node, or both)'
         required: true
         type: choice
         options:
           - both
           - cli
-          - runner-node
+          - node
       version:
         description: 'Version bump type'
         required: true
@@ -56,8 +56,8 @@ jobs:
           echo "CLI_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Bump Runner-Node version
-        if: github.event.inputs.package == 'runner-node' || github.event.inputs.package == 'both'
-        working-directory: ./packages/runner-node
+        if: github.event.inputs.package == 'node' || github.event.inputs.package == 'both'
+        working-directory: ./packages/node
         run: |
           pnpm version ${{ github.event.inputs.version }} --no-git-tag-version
           echo "RUNNER_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
@@ -73,9 +73,9 @@ jobs:
           if [ "${{ github.event.inputs.package }}" = "cli" ]; then
             git tag "cli-v${{ env.CLI_VERSION }}"
             git push origin "cli-v${{ env.CLI_VERSION }}"
-          elif [ "${{ github.event.inputs.package }}" = "runner-node" ]; then
-            git tag "runner-node-v${{ env.RUNNER_VERSION }}"
-            git push origin "runner-node-v${{ env.RUNNER_VERSION }}"
+          elif [ "${{ github.event.inputs.package }}" = "node" ]; then
+            git tag "node-v${{ env.RUNNER_VERSION }}"
+            git push origin "node-v${{ env.RUNNER_VERSION }}"
           else
             git tag "v${{ env.CLI_VERSION }}"
             git push origin "v${{ env.CLI_VERSION }}"

@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        description: 'Package to publish (cli, runner-node, or all)'
+        description: 'Package to publish (cli, node, or all)'
         required: true
         default: 'all'
         type: choice
         options:
           - all
           - cli
-          - runner-node
+          - node
 
 jobs:
   publish:
@@ -54,9 +54,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         continue-on-error: true
 
-      - name: Publish @envguard/runner-node to npm
-        if: github.event.inputs.package == 'all' || github.event.inputs.package == 'runner-node' || github.event_name == 'release'
-        working-directory: ./packages/runner-node
+      - name: Publish @envguard/node to npm
+        if: github.event.inputs.package == 'all' || github.event.inputs.package == 'node' || github.event_name == 'release'
+        working-directory: ./packages/node
         run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

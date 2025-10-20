@@ -88,7 +88,7 @@ pnpm init
 
 # 6. Create directory structure
 mkdir -p packages/cli/src/{commands,core,utils}
-mkdir -p packages/runner-node/src
+mkdir -p packages/node/src
 mkdir -p packages/runner-python/envguard
 mkdir -p scripts
 mkdir -p docs
@@ -2363,12 +2363,12 @@ Create Node.js runtime that auto-resolves placeholders.
 #### Task 15.1: Setup Runner Package (30 min)
 
 ```bash
-mkdir -p packages/runner-node/src
-cd packages/runner-node
+mkdir -p packages/node/src
+cd packages/node
 
 cat > package.json << 'EOF'
 {
-  "name": "@envguard/runner-node",
+  "name": "@envguard/node",
   "version": "0.1.0",
   "main": "dist/index.js",
   "scripts": {
@@ -2390,7 +2390,7 @@ pnpm install
 
 #### Task 15.2: Implement Preload Script (2 hours)
 
-**File**: `packages/runner-node/src/preload.ts`
+**File**: `packages/node/src/preload.ts`
 
 ```typescript
 import keytar from '@electron/keytar';
@@ -2470,7 +2470,7 @@ Object.defineProperty(process, 'env', {
 console.log('[EnvGuard] Node.js runner initialized');
 ```
 
-**File**: `packages/runner-node/src/index.ts`
+**File**: `packages/node/src/index.ts`
 
 ```typescript
 // Re-export preload for --require usage
@@ -2506,12 +2506,12 @@ envguard set DATABASE_URL postgresql://localhost/test
 envguard set API_KEY sk_test_12345
 
 # Run with EnvGuard runner
-node --require @envguard/runner-node/preload index.js
+node --require @envguard/node/preload index.js
 ```
 
 #### Task 15.4: Package Script Helper (30 min)
 
-**File**: `packages/runner-node/bin/envguard-node`
+**File**: `packages/node/bin/envguard-node`
 
 ```bash
 #!/usr/bin/env node
@@ -2536,7 +2536,7 @@ child.on('exit', (code) => {
 Make executable:
 
 ```bash
-chmod +x packages/runner-node/bin/envguard-node
+chmod +x packages/node/bin/envguard-node
 ```
 
 Add to package.json:
@@ -2945,7 +2945,7 @@ require('dotenv').config({ path: '.env.redacted' });
 console.log('NODE:', process.env.TEST_SECRET);
 EOF
 
-node --require @envguard/runner-node/preload test-node.js | grep "hello_world"
+node --require @envguard/node/preload test-node.js | grep "hello_world"
 
 # Test Python runner
 echo "5. Testing Python runner..."
@@ -3958,7 +3958,7 @@ Define your secrets schema:
 **Method 1: Preload script**
 
 ```bash
-node --require @envguard/runner-node/preload app.js
+node --require @envguard/node/preload app.js
 ```
 
 **Method 2: package.json**
@@ -3966,7 +3966,7 @@ node --require @envguard/runner-node/preload app.js
 ```json
 {
   "scripts": {
-    "dev": "node --require @envguard/runner-node/preload src/index.js"
+    "dev": "node --require @envguard/node/preload src/index.js"
   }
 }
 ```

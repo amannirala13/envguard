@@ -3,4 +3,4 @@
 ## Modules
 
 - [cli/src](cli/src/index.md)
-- [runner-node/src](runner-node/src/index.md)
+- [node/src](node/src/index.md)

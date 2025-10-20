@@ -325,7 +325,7 @@ This is a TypeScript monorepo using pnpm workspaces:
 envguard/
 ├── packages/
 │   ├── cli/                    # Main CLI application
-│   └── runner-node/            # Node.js runtime integration
+│   └── node/                   # Node.js runtime integration
 ├── .plan/                      # Development roadmap
 ├── package.json                # Root workspace config
 └── pnpm-workspace.yaml         # Workspace definition
@@ -396,7 +396,7 @@ pnpm dev
 ### Package Structure
 
 - **`packages/cli/`** - Main EnvGuard CLI application
-- **`packages/runner-node/`** - Node.js runtime integration
+- **`packages/node/`** - Node.js runtime integration
 - **`.plan/`** - Development roadmap and implementation guides
 
 ## 📋 Roadmap

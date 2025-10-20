@@ -17,7 +17,7 @@ This is a **pnpm workspace monorepo** with three main packages:
   - Binary entry point: `envguard` command
   - Core modules for keychain integration, secret storage, validation, and Git integration
 
-- **`packages/runner-node/`** - Node.js runtime integration (`@envguard/runner-node`)
+- **`packages/node/`** - Node.js runtime integration (`@envguard/node`)
   - Provides runtime secret injection for Node.js applications
   - Used as `envguard-node app.js` or via Node.js preload module
 
@@ -101,7 +101,7 @@ pnpm clean
 ```bash
 # Run commands for a specific package
 pnpm --filter @envguard/cli build
-pnpm --filter @envguard/runner-node test
+pnpm --filter @envguard/node test
 
 # Run tests for CLI package only
 cd packages/cli && pnpm test
@@ -137,10 +137,10 @@ pnpm test:watch
 
 ### Build Tool (tsup)
 
-Both `cli` and `runner-node` use **tsup** for building:
+Both `cli` and `node` use **tsup** for building:
 
 - CLI builds: ESM format with CLI entry point
-- Runner-node builds: Both ESM and CJS formats for compatibility
+- Node builds: Both ESM and CJS formats for compatibility
 - Generates TypeScript declarations (`.d.ts`)
 - Source maps enabled for debugging
 
@@ -221,7 +221,7 @@ When implementing keychain integration:
 - `conf` - Config management
 - `dotenv` - Env file parsing
 
-### Runner-Node Package (`@envguard/runner-node`)
+### Node Package (`@envguard/node`)
 
 - `dotenv` - Env file parsing (minimal dependencies)
 

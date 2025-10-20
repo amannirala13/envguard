@@ -329,7 +329,7 @@ pnpm test:ui      # Test UI
 pnpm test:debug   # Debug tests
 
 # Runner package
-cd packages/runner-node
+cd packages/node
 pnpm build:watch  # Watch mode build
 pnpm typecheck:watch  # Watch type checking
 ```

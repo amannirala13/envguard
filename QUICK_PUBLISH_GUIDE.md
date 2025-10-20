@@ -5,7 +5,7 @@
 Both packages are ready to publish to npm:
 
 - ✅ `@envguard/cli` - Version 0.1.6
-- ✅ `@envguard/runner-node` - Version 0.1.0
+- ✅ `@envguard/node` - Version 0.1.0
 - ✅ npm provenance enabled for supply chain security
 - ✅ Automated GitHub Actions workflows
 
@@ -18,13 +18,13 @@ Both packages are ready to publish to npm:
 cd packages/cli
 pnpm version patch  # 0.1.3 → 0.1.4
 
-cd ../runner-node
+cd ../node
 pnpm version patch  # 0.1.0 → 0.1.1
 
 # 2. Commit and tag
 cd ../..
 git add packages/*/package.json
-git commit -m "chore: bump versions - cli@0.1.4, runner-node@0.1.1"
+git commit -m "chore: bump versions - cli@0.1.4, node@0.1.1"
 git tag "v0.1.4"
 git push && git push --tags
 
@@ -60,7 +60,7 @@ pnpm publish --access public
 
 ```bash
 pnpm build
-cd packages/runner-node
+cd packages/node
 pnpm publish --access public
 ```
 
@@ -73,12 +73,12 @@ pnpm publish --access public
 - **Install:** `npm install -g @envguard/cli`
 - **Link:** https://www.npmjs.com/package/@envguard/cli
 
-### @envguard/runner-node
+### @envguard/node
 
 - **Current:** 0.1.0
 - **Published to:** npm registry with provenance
-- **Install:** `npm install @envguard/runner-node`
-- **Link:** https://www.npmjs.com/package/@envguard/runner-node
+- **Install:** `npm install @envguard/node`
+- **Link:** https://www.npmjs.com/package/@envguard/node
 
 ## 🔄 Version Bump Workflow
 
@@ -87,7 +87,7 @@ pnpm publish --access public
 1. Go to: https://github.com/amannirala13/envguard/actions/workflows/version-bump.yml
 2. Click **"Run workflow"**
 3. Select:
-   - **Package:** `both` (or `cli` / `runner-node`)
+   - **Package:** `both` (or `cli` / `node`)
    - **Version:** `patch` (or `minor` / `major`)
 4. Click **"Run workflow"**
 5. Creates commit + tag automatically
@@ -105,9 +105,9 @@ Before publishing:
 After publishing:
 
 - [ ] Verify on npm: https://www.npmjs.com/package/@envguard/cli
-- [ ] Verify on npm: https://www.npmjs.com/package/@envguard/runner-node
+- [ ] Verify on npm: https://www.npmjs.com/package/@envguard/node
 - [ ] Test installation: `npx @envguard/cli@latest status`
-- [ ] Test runner: `npm install @envguard/runner-node@latest`
+- [ ] Test runner: `npm install @envguard/node@latest`
 
 ## 💡 Common Scenarios
 
@@ -122,9 +122,9 @@ pnpm version patch
 ### Scenario 2: Only Runner Changed
 
 ```bash
-cd packages/runner-node
+cd packages/node
 pnpm version patch
-# Use manual workflow dispatch with package=runner-node
+# Use manual workflow dispatch with package=node
 ```
 
 ### Scenario 3: Both Changed (Most Common)
@@ -132,7 +132,7 @@ pnpm version patch
 ```bash
 # Bump both versions
 cd packages/cli && pnpm version patch
-cd ../runner-node && pnpm version patch
+cd ../node && pnpm version patch
 
 # Create single release - both publish automatically
 ```
@@ -143,7 +143,7 @@ cd ../runner-node && pnpm version patch
 # This publishes both packages to npm
 pnpm build && \
   cd packages/cli && pnpm publish --access public && \
-  cd ../runner-node && pnpm publish --access public
+  cd ../node && pnpm publish --access public
 ```
 
 ## 📚 Full Documentation
@@ -160,4 +160,4 @@ See detailed guides:
 - **Workflows:** https://github.com/amannirala13/envguard/actions
 - **Releases:** https://github.com/amannirala13/envguard/releases
 - **npm CLI:** https://www.npmjs.com/package/@envguard/cli
-- **npm Runner:** https://www.npmjs.com/package/@envguard/runner-node
+- **npm Runner:** https://www.npmjs.com/package/@envguard/node
