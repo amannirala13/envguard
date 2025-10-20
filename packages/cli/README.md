@@ -1,282 +1,312 @@
 # EnvGuard CLI
 
-**Simple, local secret management using your OS keychain**
+**Local-first secret management for development environments**
 
-EnvGuard is a command-line tool that stores environment variables in your operating system's secure keychain instead of `.env` files. Secrets stay on your machine, encrypted by the OS, and never touch your Git repository.
+EnvGuard is a command-line tool that stores environment variables in your operating system's secure keychain instead of `.env` files. Secrets remain on your machine, encrypted by the OS, and never touch your Git repository.
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
-![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
-![Status: Alpha](https://img.shields.io/badge/status-alpha-orange.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../../LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-green)](https://nodejs.org)
+[![npm](https://img.shields.io/npm/v/@envguard/cli)](https://www.npmjs.com/package/@envguard/cli)
 
-## What It Does
+**Status:** Alpha - Core functionality stable, API may change
 
-**Currently Implemented:**
+## Table of Contents
 
-- Store secrets in your OS keychain (macOS Keychain, Windows Credential Manager, Linux Secret Service)
-- Interactive CLI for adding, viewing, and managing secrets
-- Support for multiple environments (development, staging, production)
-- Copy secrets between environments
-- Security checks for `.env` files in your repository
-- Migration from existing `.env` files
-- Template generation for team onboarding
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Command Reference](#command-reference)
+- [Configuration](#configuration)
+- [Architecture](#architecture)
+- [Development](#development)
+- [Publishing](#publishing)
+- [Support](#support)
 
-**In Development:**
+## Installation
 
-- Runtime integration for Node.js applications
-- Secret validation and schema enforcement
-- Encrypted backup and restore
-- Python and Docker runtime support
-
-## 🚀 Quick Start
-
-### Installation
+### Global Installation
 
 ```bash
-# Install globally (requires Node.js 18+)
 npm install -g @envguard/cli
-
-# Or use without installing
-npx @envguard/cli status
 ```
 
-### Basic Usage (Just Like .env Files!)
+### Without Installation
 
 ```bash
-# 1. Initialize in your project (one-time setup)
-cd my-project
+npx @envguard/cli@latest status
+```
+
+### Requirements
+
+- Node.js >= 18.0.0
+- Supported OS: macOS, Windows, Linux
+
+## Quick Start
+
+### Initialize a Project
+
+```bash
+cd your-project
 envg init
+```
 
-# 2. Add your secrets interactively
+This creates a `.envguard` directory with project configuration.
+
+### Add Secrets
+
+**Interactive mode (recommended):**
+
+```bash
 envg edit
-# Opens interactive menu to add/edit secrets - just like editing a .env file!
+```
 
-# Or set them directly
+**Direct mode:**
+
+```bash
 envg set DATABASE_URL postgresql://localhost/mydb
-envg set API_KEY sk_live_abc123
+envg set API_KEY your-api-key-here
+```
 
-# 3. View your secrets (masked by default)
+### View Secrets
+
+```bash
+# View all secrets (masked)
 envg show all
-# Tip: Use --reveal to see actual values
-
-# 4. That's it! Your secrets are safely stored in your OS keychain
-# No .env file, no plaintext secrets in your repo
-```
-
-### Migrating from .env Files
-
-Already have a `.env` file? Migrate in seconds:
-
-```bash
-envg init
-envg migrate          # Reads .env, stores in keychain, secures your repo
-# Your secrets are now safe! The .env file can be deleted.
-```
-
-## 💡 Common Workflows
-
-### Adding Your First Secret
-
-```bash
-# Interactive way (easiest!)
-envg edit
-# Select "Add new secret" and follow the prompts
-
-# Direct way
-envg set API_KEY abc123
-```
-
-### Viewing Secrets Safely
-
-```bash
-# View all secrets (masked for security)
-envg show all
-# Output: API_KEY (required): ab***23
 
 # View specific secret
-envg show API_KEY
+envg show DATABASE_URL
 
-# Reveal actual value (when you need it)
-envg show API_KEY --reveal
+# Reveal value
+envg show DATABASE_URL --reveal
 ```
 
-### Editing Multiple Secrets
+### Migrate from .env
 
 ```bash
-# Interactive menu - edit one or many
-envg edit
-
-# Options:
-# 1. Edit all secrets
-# 2. Edit specific secret
-# 3. Add new secret
-# 4. Cancel
+envg migrate
 ```
 
-### Working with Multiple Environments
+Reads existing `.env` file and transfers secrets to your OS keychain.
 
-```bash
-# Set secrets for different environments
-envg set DATABASE_URL postgres://localhost/dev
-envg set DATABASE_URL postgres://prod-server/db --env production
+## Command Reference
 
-# Copy development secrets to staging
-envg copy --from development --to staging
-
-# Copy specific secret to production (with confirmation)
-envg copy API_KEY --from development --to production
-
-# View staging environment secrets
-envg show all --env staging
-```
-
-### Checking Project Health
-
-```bash
-# Full security and secrets check
-envg check
-
-# Just check if secrets are configured properly
-envg check --secrets
-
-# Just check for security issues (.env files, etc.)
-envg check --security
-```
-
-### Generating Template for Team
-
-```bash
-# Create .env.template for your team
-envg template
-
-# Team members can see what secrets they need without seeing values!
-```
-
-## 📖 How It Works
-
-EnvGuard stores your secrets in your operating system's secure keychain:
-
-1. **Initialize** - Run `envg init` to set up EnvGuard in your project
-2. **Store** - Use `envg set` or `envg edit` to save secrets to your OS keychain
-3. **Retrieve** - Use `envg get` or `envg show` to view your secrets
-4. **Manage** - Copy between environments, export templates, run security checks
-
-```
-my-project/
-├── .envguard/
-│   ├── config.json        # Project config (gitignored)
-│   └── manifest.json      # Secret manifest (gitignored)
-└── .env.template          # Team documentation (optional, can commit)
-```
-
-**Where secrets are stored:**
-
-- **macOS**: Keychain Access (`Security.framework`)
-- **Windows**: Credential Manager
-- **Linux**: Secret Service API (GNOME Keyring, KWallet)
-
-Secrets are stored with a namespaced key: `{package-name}:{environment}:{secret-name}`
-
-This ensures no conflicts between different projects on your machine.
-
-## 🛠️ Commands
-
-### Getting Started
+### Project Initialization
 
 | Command        | Description                              |
 | -------------- | ---------------------------------------- |
 | `envg init`    | Initialize EnvGuard in current directory |
-| `envg status`  | Show EnvGuard status and configuration   |
-| `envg migrate` | Migrate from .env files to EnvGuard      |
+| `envg status`  | Show project status and configuration    |
+| `envg migrate` | Import secrets from `.env` file          |
 
-### Managing Secrets (Interactive & Easy!)
+### Secret Management
 
-| Command                  | Description                                   |
-| ------------------------ | --------------------------------------------- |
-| `envg edit`              | 🎯 Interactive menu to add/edit secrets       |
-| `envg edit <key>`        | Edit a specific secret                        |
-| `envg set <key> <value>` | Quickly set a secret                          |
-| `envg show all`          | View all secrets (masked)                     |
-| `envg show <key>`        | View specific secret (use --reveal to unmask) |
-| `envg get <key>`         | Retrieve a secret value                       |
-| `envg del <key>`         | Delete a secret                               |
-| `envg list`              | List all secret keys                          |
+| Command                  | Description                        |
+| ------------------------ | ---------------------------------- |
+| `envg edit`              | Interactive secret editor          |
+| `envg edit <key>`        | Edit specific secret               |
+| `envg set <key> <value>` | Set a secret                       |
+| `envg get <key>`         | Retrieve secret value              |
+| `envg show <key>`        | Display secret (masked by default) |
+| `envg show all`          | Display all secrets                |
+| `envg del <key>`         | Delete a secret                    |
+| `envg list`              | List all secret keys               |
 
 ### Environment Management
 
-| Command                                   | Description                        |
-| ----------------------------------------- | ---------------------------------- |
-| `envg copy --from dev --to staging`       | Copy all secrets between envs      |
-| `envg copy <key> --from dev --to prod`    | Copy specific secret               |
-| `envg set <key> <value> --env production` | Set secret in specific environment |
-| `envg show all --env staging`             | View secrets in specific env       |
+| Command                                    | Description                           |
+| ------------------------------------------ | ------------------------------------- |
+| `envg set <key> <value> --env <name>`      | Set secret for specific environment   |
+| `envg show all --env <name>`               | View environment secrets              |
+| `envg copy --from <src> --to <dest>`       | Copy all secrets between environments |
+| `envg copy <key> --from <src> --to <dest>` | Copy specific secret                  |
 
 ### Project Health
 
-| Command                 | Description                                   |
-| ----------------------- | --------------------------------------------- |
-| `envg check`            | Check secrets and security issues             |
-| `envg check --secrets`  | Only check missing/invalid secrets            |
-| `envg check --security` | Only check security issues (.env files, etc.) |
-| `envg template`         | Generate .env.template from current secrets   |
+| Command                 | Description                   |
+| ----------------------- | ----------------------------- |
+| `envg check`            | Run all health checks         |
+| `envg check --secrets`  | Validate secret configuration |
+| `envg check --security` | Check for security issues     |
+| `envg template`         | Generate `.env.template` file |
 
-### Export (Use Sparingly!)
+### Advanced
 
-| Command                          | Description                                  |
-| -------------------------------- | -------------------------------------------- |
-| `envg export --unsafe --to .env` | Export to .env file (INSECURE - be careful!) |
+| Command                          | Description                            |
+| -------------------------------- | -------------------------------------- |
+| `envg export --unsafe --to .env` | Export to plaintext (use with caution) |
 
-## 🛡️ Security Model
+## Configuration
 
-**What EnvGuard Does:**
+### Project Configuration
 
-- Stores secrets in your OS keychain (hardware-encrypted, platform-specific)
-- Secrets are bound to your machine and can't easily be copied
-- Tracks when secrets were last updated for audit purposes
-- Supports marking secrets as required or optional
+Located at `.envguard/config.json`:
 
-**What EnvGuard Doesn't Do (Yet):**
+```json
+{
+  "packageName": "my-app",
+  "defaultEnvironment": "development",
+  "environments": ["development", "staging", "production"]
+}
+```
 
-- Schema validation of secret values
-- Secret rotation automation
-- Git hooks for preventing commits
-- Encrypted backup/sync between machines
+### Secret Manifest
 
-EnvGuard focuses on being a simple, reliable tool for local development. For production secret management, consider dedicated solutions like HashiCorp Vault, AWS Secrets Manager, or similar.
+Located at `.envguard/manifest.json`:
 
-## 🚧 Development Status
+```json
+{
+  "secrets": {
+    "DATABASE_URL": {
+      "required": true,
+      "description": "Database connection string"
+    },
+    "API_KEY": {
+      "required": true,
+      "description": "External API authentication key"
+    }
+  }
+}
+```
 
-EnvGuard is in **alpha**. Core functionality works, but expect bugs and changes.
+### Storage Location
 
-**What Works:**
+Secrets are stored in your OS keychain with the format:
 
-- ✅ OS keychain storage (macOS, Windows, Linux)
-- ✅ All CLI commands (init, set, get, edit, show, copy, check, migrate, etc.)
-- ✅ Multi-environment support
-- ✅ Interactive secret management
-- ✅ Security checks
+```
+{packageName}:{environment}:{secretKey}
+```
 
-**In Progress:**
+**Platform-specific locations:**
 
-- ⏳ Runtime integration (Node.js, Python, Docker)
-- ⏳ Secret validation and schema enforcement
-- ⏳ Encrypted backup/restore
-- ⏳ Comprehensive test coverage
+- **macOS:** Keychain Access (via Security.framework)
+- **Windows:** Credential Manager (via DPAPI)
+- **Linux:** Secret Service (GNOME Keyring / KWallet via libsecret)
 
-## 📁 Project Repository
+## Architecture
 
-This is part of the EnvGuard monorepo: https://github.com/amannirala13/envguard
+### File Structure
 
-## 🆘 Support
+```
+your-project/
+├── .envguard/
+│   ├── config.json       # Project configuration
+│   └── manifest.json     # Secret definitions
+├── .env.template         # Team onboarding template (optional)
+└── .gitignore            # Excludes .envguard/
+```
 
-- 📚 [Documentation](https://github.com/amannirala13/envguard#readme)
-- 🐛 [Issue Tracker](https://github.com/amannirala13/envguard/issues)
-- 💬 [Discussions](https://github.com/amannirala13/envguard/discussions)
+### Security Model
 
-## 📄 License
+**What EnvGuard provides:**
+
+- OS-level encryption for secrets
+- Per-machine secret isolation
+- Audit trails for secret updates
+- Namespace isolation between projects
+
+**What EnvGuard does not provide:**
+
+- Secret synchronization across machines
+- Schema validation (planned)
+- Automatic rotation (planned)
+- Production-grade secret management
+
+For production environments, use dedicated solutions like HashiCorp Vault, AWS Secrets Manager, or Google Secret Manager.
+
+### Data Flow
+
+```
+┌─────────────┐
+│  Developer  │
+└──────┬──────┘
+       │ envg set
+       ▼
+┌────────────────┐      ┌──────────────┐
+│ EnvGuard CLI   │─────▶│ OS Keychain  │
+└────────────────┘      └──────────────┘
+       │                       │
+       │ envg get              │
+       ▼                       ▼
+┌────────────────────────────────┐
+│  Application (process.env)     │
+└────────────────────────────────┘
+```
+
+## Development
+
+### Build from Source
+
+```bash
+# Clone the monorepo
+git clone https://github.com/amannirala13/envguard.git
+cd envguard
+
+# Install dependencies
+pnpm install
+
+# Build CLI package
+pnpm --filter @envguard/cli build
+
+# Run locally
+node packages/cli/dist/cli.js status
+```
+
+### Development Commands
+
+```bash
+# Start in watch mode
+pnpm --filter @envguard/cli dev
+
+# Run tests
+pnpm --filter @envguard/cli test
+
+# Type checking
+pnpm --filter @envguard/cli typecheck
+
+# Linting
+pnpm --filter @envguard/cli lint
+```
+
+### Link Locally
+
+```bash
+# Link for local development
+pnpm --filter @envguard/cli link --global
+
+# Use in another project
+cd ../your-app
+envg status
+```
+
+## Publishing
+
+See:
+
+- [Publishing Guide](./PUBLISHING.md) - Detailed publishing instructions
+- [Publish Checklist](./PUBLISH_CHECKLIST.md) - Pre-publish verification steps
+- [Root Publishing Guide](../../PUBLISHING.md) - Monorepo publishing workflow
+
+## Package Information
+
+- **Package:** `@envguard/cli`
+- **Version:** See [package.json](./package.json)
+- **Dependencies:** See [package.json](./package.json)
+- **License:** MIT
+- **Repository:** [https://github.com/amannirala13/envguard](https://github.com/amannirala13/envguard)
+
+## Related Packages
+
+- **[@envguard/core](../core/README.md)** - Core business logic (internal)
+- **[@envguard/node](../node/README.md)** - Node.js runtime integration (planned)
+
+## Support
+
+- **Documentation:** [Main README](../../README.md)
+- **Issues:** [GitHub Issues](https://github.com/amannirala13/envguard/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/amannirala13/envguard/discussions)
+- **npm:** [@envguard/cli](https://www.npmjs.com/package/@envguard/cli)
+
+## License
 
 MIT © [Aman Nirala](https://github.com/amannirala13)
 
----
-
-**Made for developers who care about security**
+See [LICENSE](../../LICENSE) for details.

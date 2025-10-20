@@ -2,34 +2,41 @@
 
 **Simple, local secret management using your OS keychain**
 
-EnvGuard is a command-line tool that stores environment variables in your operating system's secure keychain instead of `.env` files. Secrets stay on your machine, encrypted by the OS, and never touch your Git repository.
+EnvGuard is a command-line tool that stores environment variables in your operating system's secure keychain instead of
+`.env` files. Secrets stay on your machine, encrypted by the OS, and never touch your Git repository.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
 ![Status: Alpha](https://img.shields.io/badge/status-alpha-orange.svg)
 
-## 📚 Documentation
+## Documentation
 
-### User Guides
+### For Users
 
 - **[Quick Start](#-quick-start)** - Get started in 5 minutes
 - **[Commands Reference](#-commands)** - All available commands
 - **[Common Workflows](#-common-workflows)** - Real-world usage examples
 - **[How It Works](#-how-it-works)** - Architecture and file structure
+- **[Security Model](#-security-model)** - How secrets are protected
+- **[CLI Package](./packages/cli/README.md)** - CLI application documentation
 
-### Maintainer Guides
+### For Contributors
+
+- **[Contributing Guide](#-contributing)** - Development setup and guidelines
+- **[Development Scripts](./SCRIPTS.md)** - Available npm/pnpm scripts
+- **[Claude AI Guidelines](./CLAUDE.md)** - Instructions for AI assistants
+- **[Project Structure](#-project-structure)** - Monorepo architecture
+- **[Core Package](./packages/core/README.md)** - Core business logic (internal)
+- **[Roadmap](#-roadmap)** - Development timeline and progress
+
+### For Maintainers
 
 - **[Quick Publish Guide](./QUICK_PUBLISH_GUIDE.md)** - Fast reference for publishing packages
 - **[Detailed Publishing Guide](./PUBLISHING.md)** - Complete publishing documentation
 - **[GitHub Actions Setup](./GITHUB_ACTIONS_SETUP.md)** - CI/CD configuration
-- **[Contributing](#-contributing)** - Development setup and guidelines
-
-### Project Information
-
-- **[Project Structure](#-project-structure)** - Monorepo architecture
-- **[Roadmap](#-roadmap)** - Development timeline
-- **[Security Model](#-security-model)** - How secrets are protected
+- **[CLI Publishing Checklist](./packages/cli/PUBLISH_CHECKLIST.md)** - Pre-publish verification
+- **[CLI Publishing Guide](./packages/cli/PUBLISHING.md)** - CLI-specific publishing steps
 
 ## What It Does
 
@@ -50,7 +57,7 @@ EnvGuard is a command-line tool that stores environment variables in your operat
 - Encrypted backup and restore
 - Python and Docker runtime support
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -95,7 +102,7 @@ envg migrate          # Reads .env, stores in keychain, secures your repo
 # Your secrets are now safe! The .env file can be deleted.
 ```
 
-## 💡 Common Workflows
+## Common Workflows
 
 ### Adding Your First Secret
 
@@ -174,7 +181,7 @@ envg template
 # Team members can see what secrets they need without seeing values!
 ```
 
-## 📖 How It Works
+## How It Works
 
 EnvGuard stores your secrets in your operating system's secure keychain:
 
@@ -201,7 +208,7 @@ Secrets are stored with a namespaced key: `{package-name}:{environment}:{secret-
 
 This ensures no conflicts between different projects on your machine.
 
-## 🛠️ Build and Use (Node workflow)
+## Build and Use
 
 EnvGuard ships as a standard Node.js CLI. Use whichever workflow matches your needs:
 
@@ -252,7 +259,7 @@ envguard status
 
 ---
 
-## 🛠️ Commands
+## Commands
 
 ### Getting Started
 
@@ -266,7 +273,7 @@ envguard status
 
 | Command                  | Description                                   |
 | ------------------------ | --------------------------------------------- |
-| `envg edit`              | 🎯 Interactive menu to add/edit secrets       |
+| `envg edit`              | Interactive menu to add/edit secrets          |
 | `envg edit <key>`        | Edit a specific secret                        |
 | `envg set <key> <value>` | Quickly set a secret                          |
 | `envg show all`          | View all secrets (masked)                     |
@@ -299,7 +306,7 @@ envguard status
 | -------------------------------- | -------------------------------------------- |
 | `envg export --unsafe --to .env` | Export to .env file (INSECURE - be careful!) |
 
-## 🛡️ Security Model
+## Security Model
 
 **What EnvGuard Does:**
 
@@ -315,9 +322,10 @@ envguard status
 - Git hooks for preventing commits
 - Encrypted backup/sync between machines
 
-EnvGuard focuses on being a simple, reliable tool for local development. For production secret management, consider dedicated solutions like HashiCorp Vault, AWS Secrets Manager, or similar.
+EnvGuard focuses on being a simple, reliable tool for local development. For production secret management, consider
+dedicated solutions like HashiCorp Vault, AWS Secrets Manager, or similar.
 
-## 📁 Project Structure
+## Project Structure
 
 This is a TypeScript monorepo using pnpm workspaces:
 
@@ -331,28 +339,28 @@ envguard/
 └── pnpm-workspace.yaml         # Workspace definition
 ```
 
-## 🚧 Development Status
+## Development Status
 
 EnvGuard is in **alpha**. Core functionality works, but expect bugs and changes.
 
 **What Works:**
 
-- ✅ OS keychain storage (macOS, Windows, Linux)
-- ✅ All CLI commands (init, set, get, edit, show, copy, check, migrate, etc.)
-- ✅ Multi-environment support
-- ✅ Interactive secret management
-- ✅ Security checks
+- OS keychain storage (macOS, Windows, Linux)
+- All CLI commands (init, set, get, edit, show, copy, check, migrate, etc.)
+- Multi-environment support
+- Interactive secret management
+- Security checks
 
 **In Progress:**
 
-- ⏳ Runtime integration (Node.js, Python, Docker)
-- ⏳ Secret validation and schema enforcement
-- ⏳ Encrypted backup/restore
-- ⏳ Comprehensive test coverage
+- Runtime integration (Node.js, Python, Docker)
+- Secret validation and schema enforcement
+- Encrypted backup/restore
+- Comprehensive test coverage
 
 See [Roadmap](#-roadmap) below for planned features.
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our development workflow:
 
@@ -399,45 +407,43 @@ pnpm dev
 - **`packages/node/`** - Node.js runtime integration
 - **`.plan/`** - Development roadmap and implementation guides
 
-## 📋 Roadmap
-
-### Week 1: Foundation ✅
+## Roadmap
 
 - [x] Project setup and configuration
 - [x] Implementation planning
-- [ ] Keychain integration
-- [ ] Basic CLI commands
-
-### Week 2: Core Features
-
-- [ ] Config parser and validation
+- [x] Keychain integration
+- [x] Basic CLI commands
+- [x] Config parser and validation
+- [x] Multi-environment support
+- [x] Security checks for .env files
+- [x] Migration from .env files
+- [x] Interactive secret management
+- [x] Template generation
+- [x] Copying secrets between environments
+- [x] Export to .env file (unsafe) for backwards compatibility
+- [ ] Node.js runner
+- [ ] Secret validation/schema enforcement
 - [ ] Backup/restore system
+- [ ] GUI application for macOS
+- [ ] GUI application for Windows
+- [ ] GUI application for Linux
+
+### Planned Features
+
+- [ ] Encrypted sync between machines
 - [ ] Secret rotation
 - [ ] Git integration
-
-### Week 3: Runtime Integration
-
-- [ ] Node.js runner
 - [ ] Python runner
 - [ ] Docker integration
 
-### Week 4: Release
+## Support
 
-- [ ] Cross-platform packaging
-- [ ] Documentation
-- [ ] CI/CD pipeline
-- [ ] Public release
+- [Documentation](https://github.com/amannirala13/envguard)
+- [Issue Tracker](https://github.com/amannirala13/envguard/issues)
+- [Discussions](https://github.com/amannirala13/envguard/discussions)
 
-## 🆘 Support
-
-- 📚 [Documentation](https://envguard.dev/docs)
-- 🐛 [Issue Tracker](https://github.com/envguard/envguard/issues)
-- 💬 [Discussions](https://github.com/envguard/envguard/discussions)
-
-## 📄 License
+## License
 
 MIT © [EnvGuard Contributors](https://github.com/amannirala13/envguard/graphs/contributors)
 
----
-
-**Made with ❤️ for developers who care about security**
+See [LICENSE](./LICENSE) for details.
