@@ -21,7 +21,6 @@ jobs:
     environment: npm-publish
     permissions:
       contents: read
-      packages: write
       id-token: write
 
     steps:
@@ -61,29 +60,4 @@ jobs:
         run: pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        continue-on-error: true
-
-      # Optional: Also publish to GitHub Packages
-      - name: Setup Node.js for GitHub Packages
-        if: github.event_name == 'release'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@envguard'
-
-      - name: Publish @envguard/cli to GitHub Packages
-        if: github.event_name == 'release'
-        working-directory: ./packages/cli
-        run: pnpm publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
-      - name: Publish @envguard/runner-node to GitHub Packages
-        if: github.event_name == 'release'
-        working-directory: ./packages/runner-node
-        run: pnpm publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
