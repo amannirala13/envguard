@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { SystemKeychain } from '../../src';
+import { SystemKeychain } from '@envguard/core';
 
 // Check if we're in a CI environment without keychain support
 const isCI = process.env.CI === 'true';
