@@ -56,8 +56,8 @@ pnpm add @envguard/node
 npx envguard init
 
 # Set your secrets
-npx envguard set my-app API_KEY your_secret_key_here
-npx envguard set my-app DATABASE_URL postgres://localhost/mydb
+npx envguard set API_KEY your_secret_key_here
+npx envguard set DATABASE_URL postgres://localhost/mydb
 ```
 
 ### 3. Use in your app
@@ -305,7 +305,7 @@ npx envguard init
 
 ```bash
 # For each secret in .env
-npx envguard set my-app SECRET_NAME secret_value
+npx envguard set SECRET_NAME secret_value
 ```
 
 **Option B: Automated script**
@@ -314,7 +314,7 @@ npx envguard set my-app SECRET_NAME secret_value
 # Read from .env and store in keychain
 cat .env | while IFS='=' read -r key value; do
   [ -n "$key" ] && [ -n "$value" ] && \
-    npx envguard set my-app "$key" "$value"
+    npx envguard set "$key" "$value"
 done
 ```
 
@@ -365,14 +365,14 @@ ENVGUARD_ENV > NODE_ENV > 'development'
 ### Multi-Environment Setup
 
 ```bash
-# Development secrets
-ENVGUARD_ENV=development npx envguard set my-app API_KEY dev_key_123
+# Development secrets (default environment)
+npx envguard set API_KEY dev_key_123
 
 # Staging secrets
-ENVGUARD_ENV=staging npx envguard set my-app API_KEY staging_key_456
+npx envguard set API_KEY staging_key_456 --env staging
 
 # Production secrets
-ENVGUARD_ENV=production npx envguard set my-app API_KEY prod_key_789
+npx envguard set API_KEY prod_key_789 --env production
 ```
 
 ### Load Specific Environment
@@ -628,7 +628,7 @@ Yes! `process.env` variables take precedence (unless `override: true`).
 export API_KEY=shell_value
 
 // EnvGuard secret
-envguard set my-app API_KEY keychain_value
+envguard set API_KEY keychain_value
 
 // Load
 await load({ override: false });
@@ -675,7 +675,7 @@ See [Migration Guide](#migration-from-dotenv) above. TL;DR:
 
 1. `npm install @envguard/node`
 2. `envguard init`
-3. Migrate secrets: `envguard set my-app KEY value`
+3. Migrate secrets: `envguard set KEY value`
 4. Change: `require('dotenv')` → `require('@envguard/node')`
 5. Delete `.env` file
 

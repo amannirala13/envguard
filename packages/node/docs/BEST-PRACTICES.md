@@ -43,10 +43,10 @@ DATABASE_URL=postgres://user:pass@host/db
 ```typescript
 // ✅ Good - Separate secrets per environment
 // Development
-envguard set my-app API_KEY dev_key_123 --env development
+envguard set API_KEY dev_key_123 --env development
 
 // Production
-envguard set my-app API_KEY prod_key_456 --env production
+envguard set API_KEY prod_key_456 --env production
 
 // Load correct environment
 import { load } from '@envguard/node';
@@ -96,7 +96,7 @@ try {
 
 ```bash
 # Update secret in keychain
-envguard set my-app API_KEY new_rotated_key
+envguard set API_KEY new_rotated_key
 
 # Restart application to pick up new value
 pm2 restart my-app
@@ -199,13 +199,13 @@ await load(); // Uses 'staging'
 
 ```bash
 # Development
-envguard set my-app DATABASE_URL postgres://localhost/dev_db --env development
+envguard set DATABASE_URL postgres://localhost/dev_db --env development
 
 # Staging
-envguard set my-app DATABASE_URL postgres://staging.example.com/db --env staging
+envguard set DATABASE_URL postgres://staging.example.com/db --env staging
 
 # Production
-envguard set my-app DATABASE_URL postgres://prod.example.com/db --env production
+envguard set DATABASE_URL postgres://prod.example.com/db --env production
 ```
 
 ### 3. Local Overrides
@@ -441,7 +441,7 @@ npx envguard init
 ```bash
 # Read from .env file
 cat .env | while IFS='=' read -r key value; do
-  envguard set my-app "$key" "$value"
+  envguard set "$key" "$value"
 done
 ```
 
