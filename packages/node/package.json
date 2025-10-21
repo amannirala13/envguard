@@ -1,6 +1,6 @@
 {
   "name": "@envguard/node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "EnvGuard Node.js runtime - Drop-in dotenv replacement with OS keychain",
   "keywords": [
     "envguard",
