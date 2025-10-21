@@ -47,14 +47,13 @@ This is a **pnpm workspace monorepo** with four main packages:
 
 ### Development Status
 
-**Current Phase:** Foundation (Week 1 of 4-week roadmap)
+**Current Phase:** Alpha
 
 - Project structure: ✅ Complete
 - Configuration: ✅ Complete
-- Keychain integration: 🚧 Not yet implemented
-- CLI commands: 🚧 Not yet implemented
-
-See `.plan/implementation-guidebook.md` for the complete 4-week development roadmap with detailed implementation instructions for each module.
+- Keychain integration: ✅ Complete
+- CLI commands: ✅ Complete
+- Node.js runtime: ✅ Complete
 
 ## Common Commands
 
@@ -258,7 +257,7 @@ The codebase uses **strict TypeScript** with comprehensive checks:
 
 ## Reference Documentation
 
-- **Implementation Guide:** `.plan/implementation-guidebook.md` - Complete 28-day roadmap with detailed tasks
 - **README:** `README.md` - User-facing documentation and project overview
+- **Package Documentation:** See individual package READMEs in `packages/*/README.md`
 - **Package Manager:** pnpm ≥8.0.0 required
 - **Node Version:** ≥18.0.0 required

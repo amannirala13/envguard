@@ -19,7 +19,12 @@ EnvGuard is a command-line tool that stores environment variables in your operat
 - **[Common Workflows](#-common-workflows)** - Real-world usage examples
 - **[How It Works](#-how-it-works)** - Architecture and file structure
 - **[Security Model](#-security-model)** - How secrets are protected
-- **[CLI Package](./packages/cli/README.md)** - CLI application documentation
+
+#### Packages
+
+- **[CLI Package](./packages/cli/README.md)** - Command-line interface for managing secrets
+- **[Node.js Runtime](./packages/node/README.md)** - Drop-in dotenv replacement for Node.js
+- **[Core Package](./packages/core/README.md)** - Core business logic (internal)
 
 ### For Contributors
 
@@ -27,8 +32,14 @@ EnvGuard is a command-line tool that stores environment variables in your operat
 - **[Development Scripts](./SCRIPTS.md)** - Available npm/pnpm scripts
 - **[Claude AI Guidelines](./CLAUDE.md)** - Instructions for AI assistants
 - **[Project Structure](#-project-structure)** - Monorepo architecture
-- **[Core Package](./packages/core/README.md)** - Core business logic (internal)
 - **[Roadmap](#-roadmap)** - Development timeline and progress
+
+#### Package-Specific Guides
+
+- **[Node.js Runtime](./packages/node/README.md)**
+  - [Best Practices](./packages/node/docs/BEST-PRACTICES.md)
+  - [Contributing Guide](./packages/node/CONTRIBUTING.md)
+  - [CI/CD Guide](./packages/node/docs/CI-CD.md)
 
 ### For Maintainers
 
@@ -50,9 +61,16 @@ EnvGuard is a command-line tool that stores environment variables in your operat
 - Migration from existing `.env` files
 - Template generation for team onboarding
 
+**Recently Added:**
+
+- **Node.js Runtime** - Drop-in replacement for dotenv ([`@envguard/node`](./packages/node/README.md))
+  - Auto-loading secrets from keychain
+  - Multi-environment support
+  - Full TypeScript support
+  - Testing utilities included
+
 **In Development:**
 
-- Runtime integration for Node.js applications
 - Secret validation and schema enforcement
 - Encrypted backup and restore
 - Python and Docker runtime support
@@ -334,7 +352,6 @@ envguard/
 ├── packages/
 │   ├── cli/                    # Main CLI application
 │   └── node/                   # Node.js runtime integration
-├── .plan/                      # Development roadmap
 ├── package.json                # Root workspace config
 └── pnpm-workspace.yaml         # Workspace definition
 ```
@@ -405,7 +422,6 @@ pnpm dev
 
 - **`packages/cli/`** - Main EnvGuard CLI application
 - **`packages/node/`** - Node.js runtime integration
-- **`.plan/`** - Development roadmap and implementation guides
 
 ## Roadmap
 
@@ -421,7 +437,7 @@ pnpm dev
 - [x] Template generation
 - [x] Copying secrets between environments
 - [x] Export to .env file (unsafe) for backwards compatibility
-- [ ] Node.js runner
+- [x] Node.js runtime integration
 - [ ] Secret validation/schema enforcement
 - [ ] Backup/restore system
 - [ ] GUI application for macOS
