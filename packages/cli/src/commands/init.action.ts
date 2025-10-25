@@ -5,7 +5,8 @@
  */
 
 import fs from 'fs/promises';
-import { ConfigManager } from '@envguard/core';
+import inquirer from 'inquirer';
+import { ConfigManager, PackageNameResolver } from '@envguard/core';
 import { TemplateFileFinder } from '../utils/template-finder';
 import { error, info, success, warn } from '../utils/logger';
 
@@ -46,15 +47,76 @@ async function createDefaultTemplateFile(filename: string): Promise<void> {
 }
 
 /**
- * Detect package name from package.json
+ * Prompt user to select or enter package name
+ *
+ * @returns Selected package name
  */
-async function detectPackageName(): Promise<string> {
-  try {
-    const pkgJson = JSON.parse(await fs.readFile('package.json', 'utf-8'));
-    return pkgJson.name || 'my-app';
-  } catch {
-    return 'my-app';
+async function promptPackageName(): Promise<string> {
+  // Get suggestions from project context
+  const suggestions = await PackageNameResolver.suggest(process.cwd());
+
+  // If we have no suggestions, ask user to enter manually
+  if (suggestions.length === 0) {
+    const answer = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'packageName',
+        message: 'Enter package name (e.g., com.company.app):',
+        default: 'local.my-app',
+        validate: (input: string) => {
+          const validation = PackageNameResolver.validate(input);
+          if (!validation.valid) {
+            return validation.error || 'Invalid package name';
+          }
+          if (validation.error) {
+            warn(validation.error);
+          }
+          return true;
+        },
+      },
+    ]);
+    return answer.packageName;
   }
+
+  // Show suggestions with option for custom input
+  const answer = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'packageName',
+      message: 'Select package identifier:',
+      choices: [
+        ...suggestions.map((s) => ({
+          name: `${s}${PackageNameResolver.isReverseDomain(s) ? ' (recommended)' : ''}`,
+          value: s,
+        })),
+        { name: '→ Enter custom name', value: '__custom__' },
+      ],
+    },
+  ]);
+
+  // If custom selected, prompt for input
+  if (answer.packageName === '__custom__') {
+    const customAnswer = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'customName',
+        message: 'Enter package name (e.g., com.company.app):',
+        validate: (input: string) => {
+          const validation = PackageNameResolver.validate(input);
+          if (!validation.valid) {
+            return validation.error || 'Invalid package name';
+          }
+          if (validation.error) {
+            warn(validation.error);
+          }
+          return true;
+        },
+      },
+    ]);
+    return customAnswer.customName;
+  }
+
+  return answer.packageName;
 }
 
 /**
@@ -84,11 +146,21 @@ export async function initAction(options: InitOptions): Promise<void> {
   let packageName: string;
 
   if (options.package) {
+    // Validate provided package name
+    const validation = PackageNameResolver.validate(options.package);
+    if (!validation.valid) {
+      error(validation.error || 'Invalid package name');
+      process.exit(1);
+    }
+    if (validation.error) {
+      warn(validation.error); // Show warning for non-reverse-domain names
+    }
     packageName = options.package;
     info(`Using package name: ${packageName}`);
   } else {
-    packageName = await detectPackageName();
-    info(`Auto-detected package name: ${packageName}`);
+    // Interactive package name selection
+    packageName = await promptPackageName();
+    info(`Selected package name: ${packageName}`);
   }
 
   // 3. Determine template file
