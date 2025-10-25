@@ -182,24 +182,33 @@ ENVGUARD_DEBUG=true node --require @envguard/node/register app.js
 
 ## API Reference
 
-### `config(options?: LoadOptions): LoadResult`
+### `async config(options?: LoadOptions): Promise<LoadResult>`
 
-Synchronous API (dotenv-compatible):
+Main configuration function (now async as of v0.2.0):
 
 ```typescript
 import envguard from '@envguard/node';
 
-const result = envguard.config({
+// ES Modules with top-level await
+const result = await envguard.config({
   environment: 'production',
   validate: true,
 });
 
 console.log(result.count); // Number of secrets loaded
+
+// Or with IIFE in CommonJS
+(async () => {
+  const result = await envguard.config();
+  console.log(result.count);
+})();
 ```
+
+**Breaking Change (v0.2.0):** `config()` is now async. Use `await` or `.then()`.
 
 ### `async load(options?: LoadOptions): Promise<LoadResult>`
 
-Asynchronous secret loading:
+Asynchronous secret loading (alias for config):
 
 ```typescript
 import { load } from '@envguard/node';
@@ -325,9 +334,9 @@ done
 - require('dotenv/config');
 + require('@envguard/node/config');
 
-// Or programmatically
+// Or programmatically (v0.2.0+: now async)
 - require('dotenv').config();
-+ require('@envguard/node').config();
++ (async () => { await require('@envguard/node').config(); })();
 ```
 
 **5. Clean up:**
@@ -345,14 +354,14 @@ echo ".envguard/" >> .gitignore
 
 ### API Compatibility
 
-| dotenv                     | @envguard/node                     | Status                          |
-| -------------------------- | ---------------------------------- | ------------------------------- |
-| `dotenv.config()`          | `envguard.config()`                | ✅ Compatible                   |
-| `dotenv.parse(src)`        | `envguard.parse(src)`              | ⚠️ Returns empty (logs warning) |
-| -                          | `await envguard.load()`            | 🆕 New async API                |
-| -                          | `await envguard.populate()`        | 🆕 Non-invasive loading         |
-| -                          | `envguard.reset()`                 | 🆕 State management             |
-| `require('dotenv/config')` | `require('@envguard/node/config')` | ✅ Compatible                   |
+| dotenv                     | @envguard/node                      | Status                          |
+| -------------------------- | ----------------------------------- | ------------------------------- |
+| `dotenv.config()`          | `await envguard.config()` (v0.2.0+) | ⚠️ Now async (breaking change)  |
+| `dotenv.parse(src)`        | `envguard.parse(src)`               | ⚠️ Returns empty (logs warning) |
+| -                          | `await envguard.load()`             | 🆕 New async API                |
+| -                          | `await envguard.populate()`         | 🆕 Non-invasive loading         |
+| -                          | `envguard.reset()`                  | 🆕 State management             |
+| `require('dotenv/config')` | `require('@envguard/node/config')`  | ✅ Auto-load still works        |
 
 ## Environment Management
 
