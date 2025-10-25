@@ -11,3 +11,12 @@ export { templateAction } from './template.action';
 export { editAction } from './edit.action';
 export { showAction } from './show.action';
 export { copyAction } from './copy.action';
+export {
+  configGetAction,
+  configSetAction,
+  configListAction,
+  configValidateAction,
+  configBackupAction,
+  configRestoreAction,
+  configMigrateAction,
+} from './config.action';
