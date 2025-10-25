@@ -48,7 +48,11 @@ export async function load(options: LoadOptions = {}): Promise<LoadResult> {
       throw new NotInitializedError();
     }
 
-    const packageName = opts.packageName || config.getPackage();
+    const packageName =
+      opts.packageName ||
+      ('getPackageName' in config
+        ? config.getPackageName()
+        : config.getPackage());
     logger.debug(`Package: ${packageName}`);
 
     // 3. Get list of keys from manifest

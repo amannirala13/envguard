@@ -62,16 +62,22 @@ npx envguard set DATABASE_URL postgres://localhost/mydb
 
 ### 3. Use in your app
 
+⚠️ **v0.3.0 Breaking Change**: Auto-loading removed. See [MIGRATION_GUIDE_V03.md](./MIGRATION_GUIDE_V03.md)
+
 **Before (dotenv):**
 
 ```javascript
 require('dotenv').config();
 ```
 
-**After (EnvGuard):**
+**After (EnvGuard v0.3.0):**
 
 ```javascript
-require('@envguard/node/config');
+// EnvGuard requires async
+(async () => {
+  await require('@envguard/node').config();
+  // Your app code here
+})();
 ```
 
 That's it! Your secrets now come from the OS keychain instead of `.env` files.
