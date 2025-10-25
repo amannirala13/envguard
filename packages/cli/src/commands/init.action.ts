@@ -202,8 +202,8 @@ export async function initAction(options: InitOptions): Promise<void> {
     }
   }
 
-  // 4. Create config
-  await configManager.create(packageName, templateFile);
+  // 4. Create config (v2)
+  await configManager.createV2(packageName);
 
   // 5. Show success message
   success('\n✓ EnvGuard initialized successfully!');

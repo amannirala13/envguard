@@ -7,7 +7,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { z } from 'zod';
-import { EnvGuardConfig, IEnvGuardConfig } from './config';
+import { EnvGuardConfig, EnvGuardConfigV2, IEnvGuardConfig } from './config';
 import { ConfigFactory } from './config.factory';
 import { EnvGuardConfigSchema } from '../types/types.schema';
 
@@ -51,13 +51,16 @@ export class ConfigParser {
   }
 
   /**
-   * Write config to JSON file
+   * Write config to JSON file (supports both v1 and v2)
    *
    * @param filePath - Path to config file
-   * @param config - Config instance to write
+   * @param config - Config instance to write (v1 or v2)
    * @throws Error if write fails
    */
-  async writeToFile(filePath: string, config: EnvGuardConfig): Promise<void> {
+  async writeToFile(
+    filePath: string,
+    config: EnvGuardConfig | EnvGuardConfigV2
+  ): Promise<void> {
     try {
       const json = this.serializeToJSON(config);
       const dir = path.dirname(filePath);
@@ -89,13 +92,13 @@ export class ConfigParser {
   }
 
   /**
-   * Serialize EnvGuardConfig to JSON string
+   * Serialize EnvGuardConfig to JSON string (supports both v1 and v2)
    *
-   * @param config - Config instance
+   * @param config - Config instance (v1 or v2)
    * @returns Formatted JSON string
    */
-  serializeToJSON(config: EnvGuardConfig): string {
-    const data: IEnvGuardConfig = config.toObject();
+  serializeToJSON(config: EnvGuardConfig | EnvGuardConfigV2): string {
+    const data = config.toObject();
     return JSON.stringify(data, null, 2);
   }
 
