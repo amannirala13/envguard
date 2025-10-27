@@ -1,6 +1,6 @@
 {
   "name": "@envguard/node",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "EnvGuard Node.js runtime - Drop-in dotenv replacement with OS keychain",
   "keywords": [
     "envguard",
@@ -37,16 +37,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./config": {
-      "types": "./dist/config.d.ts",
-      "import": "./dist/config.js",
-      "require": "./dist/config.cjs"
-    },
-    "./register": {
-      "types": "./dist/register.d.ts",
-      "import": "./dist/register.js",
-      "require": "./dist/register.cjs"
     },
     "./testing": {
       "types": "./dist/testing.d.ts",

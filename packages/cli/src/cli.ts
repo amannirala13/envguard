@@ -3,6 +3,13 @@
 import { program } from 'commander';
 import {
   checkAction,
+  configBackupAction,
+  configGetAction,
+  configListAction,
+  configMigrateAction,
+  configRestoreAction,
+  configSetAction,
+  configValidateAction,
   copyAction,
   delAction,
   editAction,
@@ -241,6 +248,69 @@ program
       await copyAction(key, options);
     }
   );
+
+// Config command with subcommands
+const configCommand = program
+  .command('config')
+  .description('Manage EnvGuard configuration');
+
+configCommand
+  .command('get <key>')
+  .description('Get a config value (supports dot notation)')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (key: string, options) => {
+    await configGetAction(key, options);
+  });
+
+configCommand
+  .command('set <key> <value>')
+  .description('Set a config value (supports dot notation)')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (key: string, value: string, options) => {
+    await configSetAction(key, value, options);
+  });
+
+configCommand
+  .command('list')
+  .description('List all config values')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (options) => {
+    await configListAction(options);
+  });
+
+configCommand
+  .command('validate')
+  .description('Validate current config')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (options) => {
+    await configValidateAction(options);
+  });
+
+configCommand
+  .command('backup')
+  .description('Backup current config')
+  .option('-o, --output <path>', 'Output path for backup file')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (options) => {
+    await configBackupAction(options);
+  });
+
+configCommand
+  .command('restore <file>')
+  .description('Restore config from backup')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (file: string, options) => {
+    await configRestoreAction(file, options);
+  });
+
+configCommand
+  .command('migrate')
+  .description('Migrate config from v1 to v2')
+  .option('--no-backup', 'Skip creating backup before migration')
+  .option('-v, --verbose', 'Enable verbose logging', false)
+  .action(async (options) => {
+    await configMigrateAction(options);
+  });
 
 program
   .command('status')

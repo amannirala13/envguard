@@ -5,9 +5,10 @@
  */
 
 import path from 'path';
-import { EnvGuardConfig } from './config';
+import { EnvGuardConfig, EnvGuardConfigV2 } from './config';
 import { ConfigParser } from './config.parser';
 import { ConfigFactory } from './config.factory';
+import { ConfigMigrator } from './config-migrator';
 
 /**
  * Manages EnvGuard configuration operations and business logic
@@ -47,12 +48,48 @@ export class ConfigManager {
   }
 
   /**
-   * Load config from disk
+   * Load config from disk (v1 or v2)
    *
-   * @returns EnvGuardConfig instance or null if not initialized
+   * @returns EnvGuardConfig or EnvGuardConfigV2 instance or null if not initialized
    */
-  async load(): Promise<EnvGuardConfig | null> {
-    return await this.parser.readFromFile(this.configPath);
+  async load(): Promise<EnvGuardConfig | EnvGuardConfigV2 | null> {
+    return await ConfigMigrator.loadConfig(this.configPath);
+  }
+
+  /**
+   * Load config and auto-migrate if needed
+   *
+   * @param cliVersion - CLI version for metadata
+   * @returns EnvGuardConfigV2 instance or null if not initialized
+   */
+  async loadOrMigrate(
+    cliVersion: string = '0.3.0'
+  ): Promise<EnvGuardConfigV2 | null> {
+    const config = await this.load();
+
+    if (!config) {
+      return null;
+    }
+
+    // Already v2
+    if (config instanceof EnvGuardConfigV2) {
+      return config;
+    }
+
+    // Need migration from v1
+    const result = await ConfigMigrator.performMigration(
+      this.configPath,
+      config,
+      cliVersion
+    );
+
+    if (!result.success) {
+      throw new Error(`Migration failed: ${result.error}`);
+    }
+
+    // Reload the migrated config
+    const migratedConfig = await this.load();
+    return migratedConfig as EnvGuardConfigV2;
   }
 
   /**
@@ -76,7 +113,9 @@ export class ConfigManager {
     if (!config) {
       throw new Error('EnvGuard not initialized. Run "envguard init" first.');
     }
-    return config.getPackage();
+    return config instanceof EnvGuardConfigV2
+      ? config.getPackageName()
+      : config.getPackage();
   }
 
   /**
@@ -145,11 +184,12 @@ export class ConfigManager {
   }
 
   /**
-   * Create a new config file
+   * Create a new config file (v1 - legacy)
    *
    * @param packageName - Package name
    * @param templateFile - Template file path
    * @returns Created config instance
+   * @deprecated Use createV2 instead
    */
   async create(
     packageName: string,
@@ -157,6 +197,22 @@ export class ConfigManager {
   ): Promise<EnvGuardConfig> {
     const config = ConfigFactory.createDefault(packageName, templateFile);
     await this.save(config);
+    return config;
+  }
+
+  /**
+   * Create a new v2 config file
+   *
+   * @param packageName - Package name
+   * @param cliVersion - CLI version for metadata
+   * @returns Created v2 config instance
+   */
+  async createV2(
+    packageName: string,
+    cliVersion: string = '0.3.0'
+  ): Promise<EnvGuardConfigV2> {
+    const config = EnvGuardConfigV2.createDefault(packageName, cliVersion);
+    await this.parser.writeToFile(this.configPath, config);
     return config;
   }
 
@@ -179,20 +235,37 @@ export class ConfigManager {
       throw new Error('EnvGuard not initialized. Run "envguard init" first.');
     }
 
-    if (updates.package !== undefined) {
-      config.package = updates.package;
-    }
-    if (updates.templateFile !== undefined) {
-      config.templateFile = updates.templateFile;
-    }
-    if (updates.manifestVersion !== undefined) {
-      config.manifestVersion = updates.manifestVersion;
-    }
-    if (updates.defaultEnvironment !== undefined) {
-      config.defaultEnvironment = updates.defaultEnvironment;
+    if (config instanceof EnvGuardConfigV2) {
+      // Update v2 config
+      if (updates.package !== undefined) {
+        config.package.name = updates.package;
+      }
+      if (updates.templateFile !== undefined) {
+        config.paths.template = updates.templateFile;
+      }
+      if (updates.manifestVersion !== undefined) {
+        config.manifest.version = updates.manifestVersion;
+      }
+      if (updates.defaultEnvironment !== undefined) {
+        config.environments.default = updates.defaultEnvironment;
+      }
+    } else {
+      // Update v1 config
+      if (updates.package !== undefined) {
+        config.package = updates.package;
+      }
+      if (updates.templateFile !== undefined) {
+        config.templateFile = updates.templateFile;
+      }
+      if (updates.manifestVersion !== undefined) {
+        config.manifestVersion = updates.manifestVersion;
+      }
+      if (updates.defaultEnvironment !== undefined) {
+        config.defaultEnvironment = updates.defaultEnvironment;
+      }
     }
 
-    await this.save(config);
+    await this.parser.writeToFile(this.configPath, config);
   }
 
   /**
